@@ -1,0 +1,11 @@
+{
+  "display_name": "Maple 2023",
+  "argv": [
+    "/opt/maple/bin/maple",
+    "-jupyter",
+    "{connection_file}"
+  ],
+  "language": "maple",
+  "env": {
+  }
+}
