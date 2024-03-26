@@ -1,6 +1,6 @@
 FROM eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scipyjo-c
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ 
 
 WORKDIR /tmp
 

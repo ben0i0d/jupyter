@@ -1,6 +1,6 @@
 FROM eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjo-c
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ 
 
 USER root
 # install system dependencies

@@ -4,7 +4,7 @@ FROM eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:up-c
 ARG STACK_ARGS=
 ARG STACK_BINDIST="stack-2.11.1-linux-x86_64"
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ 
 
 USER root
 

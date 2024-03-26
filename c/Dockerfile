@@ -1,7 +1,7 @@
 FROM eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:up-c
 
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ 
 
 USER root
 
