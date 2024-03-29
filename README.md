@@ -1,113 +1,101 @@
 # jupyter-image-stacks
-## 如果您通过github访问本项目，请注意
-1. github上的仓库是由源仓库推送的镜像仓库，是一个镜像仓库
-2. 我们的源仓库是 https://eoelab.org:1031/build-image-stacks/jupyter-image-stacks  
-3. 我们的docker镜像仓库是 https://hub.docker.com/r/ben0i0d/jupyter   
-4. 对于issue/PR，我们推荐在源仓库上提，这对于我们工作更方便，并且源仓库具有pipeline支持
-## 项目梗概
-### 目标预期
-1. 完整：从基础系统开始，项目内部完成依赖，并实现一个CI文件用于自动化构建。
-2. 安全：源代码与镜像构建公开化，测试与工作场景是Rancher管理的私有K8S集群下的Jupyterhub,main分支Dockerfile均是经过测试而发布的
-3. 多样：从现有的仓库代码开始，从现有的kernel开始，集成进入项目统一构建，并完成汉化，扩展，配置镜像源等工作  
-### 如何使用
+
+English | [中文](README_CN.md)
+
+**THIS doc for non-CN USER**
+
+**dockerhub: https://hub.docker.com/r/ben0i0d/jupyter**
+### HOW TO USE
 **Docker**
-* 没有数据持久化地使用：`docker run -d -p 8888:8888 ben0i0d/jupyter:<tag>`  
-* 提供数据持久化地使用：`docker run -d -p 8888:8888 -v "${PWD}":/home/jovyan ben0i0d/jupyter:<tag>`
+* No data is used persistently：`docker run -d -p 8888:8888 ben0i0d/jupyter:<tag>`  
+* Provide data for persistent use：`docker run -d -p 8888:8888 -v "${PWD}":/home/jovyan ben0i0d/jupyter:<tag>`
 
 **Jupyterhub**  
-在singleuser内的profile指定镜像
+Specify the image in the profile of the singleuser
 ```
-- description: 提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
+- description:  SCIPython, for scientific research and engineering applications.
     display_name: Scipy
     kubespawner_override:
-        image: eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scipy-c
+        image: ben0i0d/jupyter:scipy-c
 ```
-### 全局说明
-1. 在终端下运行`pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple`完成pip换源
-2. 如果您有测试或者新需求，请构建一个新分支,在源仓库工作时，请改动ci文件中tag字段避免覆盖，如果自行构建或派生，替换dockerfile中的基础镜像为dockerhub上的镜像
-3. 对于例如Mathematica，MATLAB等商业软件，我们只提供打包，具体激活方式及可能带来的后果由用户承担
-4. 我们默认隐藏`__pycache__`，即在文件浏览器视图中不可见
-5. 对于ohmyzsh，在terminal内只需执行以下代码一次即可
+### Global description
+1. If you build or fork the image yourself, replace the base image in the Dockerfile with the image on DockerHub
+2. For commercial software such as Mathematica, MATLAB, etc., we only provide packaging, and the specific activation method and possible consequences are borne by the user
+3. We hide '__pycache__' by default, i.e. it is not visible in the file browser view
+5. For ohmyzsh, you only need to execute the following code once inside the terminal
 ```
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 ```
-6. 以下代码适用于解决matplotlib绘图缺失中文字体
-```
-from matplotlib.font_manager import FontProperties
-# 设置中文字体路径
-zh_font = FontProperties(fname="/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc")
-# 将中文字体设置为默认字体
-plt.rcParams["font.family"] = zh_font.get_name()
-```
-7. 以下代码适用于增加对conda虚拟目录的支持，以实现自定义环境不丢失
-    1. 数据持久化
-        * docker启动时添加`-v "DATA-VOLUME":/opt/conda/envs/`
-        * Jupyterhub添加额外挂载点到`/opt/conda/envs/`
-    2. 虚拟环境安装内核  
-        * 使用`conda create -n NAME *** ipykernel` 创建这个虚拟环境。使用`source activate NAME`切换到这个虚拟环境，并且添加一个kernel到本地的`.jupyter`目录，使用`python -m ipykernel install --user --name NAME --display-name "DISPLAY-NAME"`完成
-### 当前构建镜像清单
-* Upstream: 镜像上游，对标jupyter官方的minimal-notebook镜像
-    * 说明
-        1. 上游已经切换到`debian:trixie`，GPU上游镜像也基于`debian:trixie`二次构建了镜像
-        2. 默认情况下我们添加了eoelab.org的域名证书，这不会带来安全问题
-        3. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
-        4. 提供软件包：SHELL(zsh)，文件压缩/解压(.bz2|.zip|.7z)，项目管理(git|git-lfs),证书管理(ca-certificates)，编辑器（vim）,网络交互（curl|wget）,中文字体（fonts-wqy-zenhei）
-* Llinux（With Desktop-GUI）：在无特权的情况下学习Linux系统，提供Xfce桌面支持   
-* Pyjo：支持Python与Mojo，通过将python语法与生态系统相结合进行生产与研究，mojo具备元编程特性。我们期待这一环境带来的改进
-    * 说明
-        1. Mojo被合并进Python,由于网络原因需要手动执行`modular install mojo && python /opt/modular/pkg/packages.modular.com_mojo/jupyter/manage_kernel.py install `完成添加kernel
-    * Scipyjo：提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
-    * Scrpyjo: 提供Python的网页采取环境，用于提取互联网上的数据，实现自动化的信息收集和分析任务，适用于数据挖掘、网络爬虫以及业务情报收集等应用场景。
-    * Pyjospark: 提供基于Python的Spark编程接口，用于大规模数据处理和分析，提供了强大的并行计算能力和丰富的数据操作函数，适合在分布式环境中进行高效的数据处理和机器学习任务。
-    * Pyjoflink: 提供基于Python的Flink编程接口，用于对无边界和有边界的数据流进行有状态的计算,也提供了批处理API，用于基于流式计算引擎处理批量数据的计算能力。
-    * Pyjoai（With GPU）：提供常用AI工具链，提供了丰富的深度学习框架和NLP模型库，使开发人员能够轻松构建和训练各种人工智能模型，并应用于图像识别、自然语言处理等领域。
-* C: 支持C(versions ≥ C89)，通用的编程语言，底层和高效，广泛应用于系统级开发和嵌入式设备。
-* CPP：支持CPP（11,14,17），多范式的编程语言，是C语言的扩展，具备面向对象和泛型编程能力，广泛应用于系统级开发和大规模软件项目。
-* Cadabra: 支持Cadabra（Cadabra2），一种基于符号计算的软件系统，专门用于进行复杂代数计算和张量分析，适合在理论物理学和相对论研究中使用。
-* Julia：支持Julia，高性能、动态的编程语言，设计用于科学计算和数据分析，具备类似Python的易读性和类似C的执行速度。
-    * 说明：
-        1. Julia镜像中的环境变量`JULIA_NUM_THREADS`，请在启动时根据理想的并发线程数进行配置
-* SciR：支持R的科学计算环境，面向统计分析和数据可视化的编程语言，拥有丰富的数据处理库和强大的统计功能，广泛应用于数据科学和研究领域。
-  * Rspark: 提供基于R的Spark编程接口，用于在Spark上运行R代码。提供了R语言在大数据处理和分布式环境中的能力，可以进行高效的数据操作、机器学习和统计分析，适用于大规模数据处理和分析任务。
-* Haskell: 支持Haskell，纯函数式编程语言，强调表达力和静态类型检查，提供强大的模式匹配和高阶函数支持，适用于函数式编程爱好者和学术研究。
-* Java: 支持Java，面向对象的通用编程语言，跨平台特性和庞大的生态系统，广泛应用于企业级开发、移动应用程序和大型软件项目。
-* Kotlin: 支持Kotlin，现代、静态类型的编程语言，与Java互操作性良好，提供更简洁、安全和高效的语法，用于Android开发和跨平台应用程序。
-* JavaSript: 支持JavaSript，一种广泛应用于网页开发的脚本语言，用于实现交互性和动态效果，也适用于服务器端开发和移动应用程序。
-* Go: 支持Go，简洁、高效的编程语言，注重并发和性能，适用于构建可扩展的网络服务，被广泛应用于云计算、分布式系统和网络编程领域。
-* Rust: 支持Rust，安全、并发和高性能的系统级编程语言，强调内存安全和线程安全，适合开发高效且可靠的系统软件，如操作系统、网络服务和嵌入式设备。
-* Fortran：支持Fortran，最早的高级编程语言之一，用于科学计算和数值分析，特别擅长处理大规模、复杂的数值计算问题，在科学领域仍广泛使用。
-* Ansible: 支持Ansible，开源的自动化工具，用于配置管理、部署和编排任务，在服务器管理和系统自动化方面广泛应用，简化了复杂的IT操作流程。
-* Agda: 支持Agda，依赖类型的函数式编程语言和交互式证明工具，强调形式化验证和程序正确性，在形式化方法和类型理论研究中广受欢迎。
-* APL (Dyalog): 支持APL (Dyalog)，一种符号化的数组编程语言，极具表达力和紧凑性，适用于高维数据处理、数学建模和算法开发，Dyalog是其中一种流行的实现版本。
-* Chapel: 支持Chapel，用于高性能并行编程的并发编程语言，旨在简化分布式计算和大规模数据处理，具备易用性和可移植性，适用于科学计算、并行算法和并行任务调度。
-* Lua: 支持Lua，轻量级、嵌入式的脚本语言，具有简洁的语法和快速的执行速度，广泛应用于游戏开发、嵌入式系统和脚本扩展。
-* SQL: 支持SQL，是一种用于管理和处理关系型数据库的语言。它是一个标准化的语言，通常用于执行各种操作，例如创建、修改和删除数据库中的表格，以及检索、插入、更新和删除表格中的数据。在环境中提供duckdb数据库
-* Sagemath：一个开源的数学计算系统，结合了多个数学软件包，提供了广泛的数学功能，如数值计算、符号计算、离散数学和统计分析。它也是一个交互式计算环境，方便进行数学建模、算法设计和学术研究。  
-* Dotnet: 一个跨平台的开发框架，支持C#、F#、PW，用于构建各种类型的应用程序，包括Web应用、桌面应用和移动应用。它提供了丰富的类库和工具，简化了开发过程，并具有高性能和可扩展性。
-* Scilab（With Desktop-GUI）: 开源的数值计算软件，适用于科学和工程领域中的数值分析、数据可视化、模拟和建模。它提供了丰富的数学函数和工具箱，支持矩阵计算、符号计算和绘图功能，是一个强大的数学工具，尤其适用于教育和研究领域，提供Xfce桌面支持，包含APT可获取的全部插件。
-* Octave: 开源的数值计算软件，类似于Matlab，用于科学计算、数据分析和数值模拟。它提供了强大的矩阵运算、绘图功能以及丰富的数值分析函数，是一个免费且便捷的工具，适合进行数学建模、算法开发和教学任务，包含APT可获取的全部插件。
-* Maple: 一个数学软件，透过智能文件界面提供强大数学引擎，可以轻松分析、探索、可视化和求解数学问题
-    * 说明
-        1. 将`license.dat libmaple.so`上传至主目录，每一次启动环境时，运行`cp license.dat /opt/maple/license && cp libmaple.so /opt/maple/bin.X86_64_LINUX/`完成激活再使用
-* Mathematica:一个科学计算软件，在数据分析、数学计算等领域提供了强大方便的使用功能。
-    * 说明
-        1. 每一次启动环境时，运行`WolframKernel`完成手动激活，激活码查看`https://ibug.io/blog/2019/05/mathematica-keygen/`，如果多次激活不成功，请运行`rm /home/jovyan/.Mathematica/Licensing/mathpass`删除之前的许可记录
-* MATLAB：一种支持数据分析、算法开发和建模的编程和数值计算平台。
-    * 说明
-        1. 将`license.lic libmwlmgrimpl.so`上传至主目录，每一次启动环境时，运行`cp license.lic /opt/matlab/r2023b/licenses/ && cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/`完成激活再使用
-    * minimal:仅仅包含`Product:MATLAB`
-    * mcm:包含数学建模所需要的工具箱
+7. The following code is applicable to add support for conda virtual directories so that custom environments are not lost
+    1. Data persistence
+        * docker add `-v "DATA-VOLUME":/opt/conda/envs/`
+        * Jupyterhub add mountpoint`/opt/conda/envs/`
+    2. Install the kernel in a virtual environment  
+        * Use `conda create -n NAME *** ipykernel` create this env,use`source activate NAME`switch，use`python -m ipykernel install --user --name NAME --display-name "DISPLAY-NAME"`done
+### List of images that are currently being built
+* Upstream: Mirror upstream, benchmarking against the jupyter official minimal-notebook image
+    * Description
+        1. Upstream has switched to `debian:trixie`, and GPU upstream images are also built based on `debian:trixie`
+        2. By default, we add the domain certificate of eoelab.org, which does not pose any security issues
+        3. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
+        4. Provided packages: SHELL (zsh), file compression/extraction (.bz2|.zip|.7z), project management (git|git-lfs), certificate management (ca-certificates), editor (vim), network interaction (curl|wget), Chinese fonts (fonts-wqy-zenhei)
+* Llinux (With Desktop-GUI): Learn Linux systems without privileges, providing Xfce desktop support
+* Pyjo: Supports Python and Mojo, combining Python syntax with the ecosystem for production and research. Mojo features metaprogramming capabilities. We look forward to the improvements this environment will bring.
+    * Description
+        1. Mojo has been merged into Python. Due to network reasons, manual execution of `modular install mojo && python /opt/modular/pkg/packages.modular.com_mojo/jupyter/manage_kernel.py install` is required to add the kernel
+    * Scipyjo: Provides a scientific computing environment for Python, offering rich numerical computation, optimization, signal processing, statistical analysis, etc., for scientific research and engineering applications.
+    * Scrpyjo: Provides a web scraping environment for Python, used for extracting data from the internet, automating information gathering and analysis tasks, suitable for data mining, web scraping, and business intelligence collection applications.
+    * Pyjospark: Provides a Python-based Spark programming interface for large-scale data processing and analysis, offering powerful parallel computing capabilities and rich data manipulation functions, suitable for efficient data processing and machine learning tasks in distributed environments.
+    * Pyjoflink: Provides a Python-based Flink programming interface for stateful computation of unbounded and bounded data streams. It also offers batch processing APIs for processing batch data computations based on stream computing engines.
+    * Pyjoai (With GPU): Provides a common AI toolchain, offering a rich set of deep learning frameworks and NLP model libraries, enabling developers to easily build and train various AI models for applications in image recognition, natural language processing, etc.
+* C: Supports C (versions ≥ C89), a general-purpose programming language, low-level and efficient, widely used in system-level development and embedded devices.
+* CPP: Supports CPP (11,14,17), a multi-paradigm programming language, an extension of the C language, with object-oriented and generic programming capabilities, widely used in system-level development and large-scale software projects.
+* Cadabra: Supports Cadabra (Cadabra2), a software system based on symbolic computation, specifically designed for complex algebraic computations and tensor analysis, suitable for use in theoretical physics and relativity research.
+* Julia: Supports Julia, a high-performance, dynamic programming language designed for scientific computing and data analysis, with readability similar to Python and execution speed similar to C.
+    * Description:
+        1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
+* SciR: Supports R's scientific computing environment, a programming language for statistical analysis and data visualization, with rich data processing libraries and powerful statistical functions, widely used in data science and research fields.
+  * Rspark: Provides an R-based Spark programming interface for running R code on Spark. It offers R language capabilities in big data processing and distributed environments, enabling efficient data manipulation, machine learning, and statistical analysis for large-scale data processing and analysis tasks.
+* Haskell: Supports Haskell, a purely functional programming language emphasizing expressiveness and static type checking, providing powerful pattern matching and higher-order function support, suitable for functional programming enthusiasts and academic research.
+* Java: Supports Java, a general-purpose object-oriented programming language with cross-platform features and a vast ecosystem, widely used in enterprise development, mobile applications, and large software projects.
+* Kotlin: Supports Kotlin, a modern, statically typed programming language with good interoperability with Java, offering more concise, safe, and efficient syntax, used for Android development and cross-platform applications.
+* JavaScript: Supports JavaScript, a widely used scripting language for web development, used to implement interactivity and dynamic effects, also applicable to server-side development and mobile applications.
+* Go: Supports Go, a concise, efficient programming language focusing on concurrency and performance, suitable for building scalable network services, widely used in cloud computing, distributed systems, and network programming fields.
+* Rust: Supports Rust, a safe, concurrent, and high-performance systems programming language emphasizing memory and thread safety, suitable for developing efficient and reliable system software such as operating systems, network services, and embedded devices.
+* Fortran: Supports Fortran, one of the earliest high-level programming languages, used for scientific computing and numerical analysis, particularly adept at handling large-scale, complex numerical computing problems, still widely used in the scientific field.
+* Ansible: Supports Ansible, an open-source automation tool used for configuration management, deployment, and orchestration tasks, widely used in server management and system automation, simplifying complex IT operation workflows.
+* Agda: Supports Agda, a dependent type functional programming language and interactive proof tool, emphasizing formal verification and program correctness, widely popular in formal methods and type theory research.
+* APL (Dyalog): Supports APL (Dyalog), a symbolic array programming language known for its expressive and concise syntax, suitable for high-dimensional data processing, mathematical modeling, and algorithm development, with Dyalog being one popular implementation version.
+* Chapel: Supports Chapel, a concurrency programming language for high-performance parallel programming, aimed at simplifying distributed computing and large-scale data processing, with ease of use and portability, suitable for scientific computing, parallel algorithms, and parallel task scheduling.
+* Lua: Supports Lua, a lightweight, embeddable scripting language with a concise syntax and fast execution speed, widely used in game development, embedded systems, and script extensions.
+* SQL: Supports SQL, a language used for managing and processing relational databases. It is a standardized language commonly used for executing various operations such as creating, modifying, and deleting tables in databases, as well as retrieving, inserting, updating, and deleting data in tables. The environment includes the duckdb database.
+* Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
+* Dotnet: A cross-platform development framework that supports C#, F#, and PW, used for building various types of applications including web applications, desktop applications, and mobile applications. It provides rich class libraries and tools, simplifying development processes, and has high performance and scalability.
+* Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
+* Octave: An open-source numerical computing software similar to Matlab, used for scientific computing, data analysis, and numerical simulation. It provides powerful matrix operations, plotting functions, and rich numerical analysis functions, a free and convenient tool suitable for mathematical modeling, algorithm development, and teaching tasks, includes all plugins available through APT.
+* Maple: A mathematical software that provides a powerful mathematical engine through an intelligent file interface, enabling easy analysis, exploration, visualization, and solving of mathematical problems.
+    * Description
+        1. Upload `license.dat libmaple.so` to the main directory. Each time the environment is started, run `cp license.dat /opt/maple/license && cp libmaple.so /opt/maple/bin.X86_64_LINUX/` to activate before use.
+* Mathematica: A scientific computing software that provides powerful and convenient features for data analysis, mathematical computation, and other fields.
+    * Description
+        1. Each time the environment is started, run `WolframKernel` to manually activate. View activation code at `https://ibug.io/blog/2019/05/mathematica-keygen/`. If activation fails multiple times, run `rm /home/jovyan/.Mathematica/Licensing/mathpass` to delete previous license records.
+* MATLAB: A programming and numerical computing platform that supports data analysis, algorithm development, and modeling.
+    * Description
+        1. Upload `license.lic libmwlmgrimpl.so` to the main directory. Each time the environment is started, run `cp license.lic /opt/matlab/r2023b/licenses/ && cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/` to activate before use.
+    * minimal: Contains only `Product:MATLAB`
+    * mcm: Contains toolboxes required for mathematical modeling.
 
-### 插件清单
 
-**全局**
-* jupyterlab-language-pack-zh-CN:对中文的支持
-* jupyterlab_tabnine：用于自动补全、参数建议、函数文档查询、跳转定义
+### List of plugins
 
-**局部**
+**Global**
+* jupyterlab-language-pack-zh-CN:Support for Chinese
+* jupyterlab_tabnine：It is used for autocompletion, parameter suggestion, function document query, and jump definition
 
-### 镜像依赖关系
+**Part**
+
+### Image dependencies
 ```mermaid
 graph LR
 BASE-->ENV{ENVIRONMENT}-->EA(Dotnet)
@@ -145,9 +133,9 @@ MATH-->ME(Mathematica)
 MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 ```
 
-## 上游
+## Upstream
 
-**软件包版本**
+**Package version**
 * cuda 12.2.0
 * Python 3.11
 * Julia 1.9.4
@@ -161,7 +149,7 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 * Maple 2023
 * Flink 
 
-**镜像源**
+**Image source**
 * conda bfsu：https://mirrors.bfsu.edu.cn/help/anaconda/
 * pip bfsu：https://mirrors.bfsu.edu.cn/help/pypi/
 * apt ustc：https://mirrors.ustc.edu.cn/help/debian.html
@@ -173,10 +161,10 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 * GO AliYun: https://mirrors.aliyun.com/goproxy/
 * cargo ustc: git://mirrors.ustc.edu.cn/crates.io-index
 
-### 项目上游
+### Upstream of the project
 jupyter团队项目 https://github.com/jupyter/docker-stacks
 
-**但是我们与上游差别较大，包括源，软件包，本地化与扩展等，因此如果您从本项目派生遇到问题，请不要到jupyter团队提问，这会加大他们的工作量**
+**However, we are quite different from the upstream in terms of sources, packages, localizations, extensions, etc., so if you have a problem with this project, please do not ask the Jupyter team questions, as it will increase their workload**
 
 ### kernel
 * C: https://github.com/XaverKlemenschits/jupyter-c-kernel
@@ -203,6 +191,6 @@ jupyter团队项目 https://github.com/jupyter/docker-stacks
 * SQL: https://github.com/suyin1203/duckdb_kernel
 * NoVNC: https://github.com/jupyterhub/jupyter-remote-desktop-proxy
 * MATLAB: https://github.com/mathworks/jupyter-matlab-proxy
-## 必要的版权说明
-对于派生自其他团队的代码，我们在文件头添加了原版版权声明，我们保留并且支持其他开发团队版权
+## Necessary copyright notice
+For code derived from other teams, we added the original copyright notice to the file header, and we retain and support the copyrights of other development teams
 
