@@ -1,4 +1,4 @@
-FROM eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:up-g
+FROM ben0i0d/jupyter:up-g
 
  
 

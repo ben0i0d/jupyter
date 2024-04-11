@@ -14,7 +14,7 @@ before_script:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:up-c"
+#       --destination "ben0i0d/jupyter:up-c"
 pyjo-c-build:
   stage: build
   needs: [] # up-c-build
@@ -25,7 +25,7 @@ pyjo-c-build:
       --dockerfile "Dockerfile"
       --cache=false
       --snapshot-mode=redo
-      --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjo-c"
+      --destination "ben0i0d/jupyter:pyjo-c"
 # scipyjo-c-build:
 #   stage: build
 #   needs: [pyjo-c-build] # 
@@ -37,7 +37,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scipyjo-c"
+#       --destination "ben0i0d/jupyter:scipyjo-c"
 # scrpyjo-c-build:
 #   stage: build
 #   needs: [pyjo-c-build] # 
@@ -54,7 +54,7 @@ pyjo-c-build:
 #       --build-arg "NO_PROXY=127.0.0.1,localhost,172.0.0.0/8,192.0.0.0/8"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scrpyjo-c"
+#       --destination "ben0i0d/jupyter:scrpyjo-c"
 # pyjospark-c-build:
 #   stage: build
 #   needs: [scipyjo-c-build] # 
@@ -66,7 +66,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjospark-c"
+#       --destination "ben0i0d/jupyter:pyjospark-c"
 # pyjoflink-c-build:
 #   stage: build
 #   needs: [scipyjo-c-build] # 
@@ -78,7 +78,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjoflink-c"
+#       --destination "ben0i0d/jupyter:pyjoflink-c"
 # pyjoai-c-build:
 #   stage: build
 #   needs: [scipyjo-c-build] # 
@@ -90,7 +90,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjoai-c"
+#       --destination "ben0i0d/jupyter:pyjoai-c"
 # llinux-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -101,7 +101,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:llinux-c"
+#       --destination "ben0i0d/jupyter:llinux-c"
 # c-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -112,7 +112,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:c-c"
+#       --destination "ben0i0d/jupyter:c-c"
 # cpp-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -123,7 +123,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:cpp-c"
+#       --destination "ben0i0d/jupyter:cpp-c"
 # fortran-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -134,7 +134,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:fortran-c"
+#       --destination "ben0i0d/jupyter:fortran-c"
 # java-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -145,7 +145,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:java-c"
+#       --destination "ben0i0d/jupyter:java-c"
 # js-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -156,7 +156,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:js-c"
+#       --destination "ben0i0d/jupyter:js-c"
 # kotlin-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -167,7 +167,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:kotlin-c"
+#       --destination "ben0i0d/jupyter:kotlin-c"
 # haskell-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -178,7 +178,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:haskell-c"
+#       --destination "ben0i0d/jupyter:haskell-c"
 # go-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -195,7 +195,7 @@ pyjo-c-build:
 #       --build-arg "NO_PROXY=127.0.0.1,localhost,172.0.0.0/8,192.0.0.0/8"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:go-c"
+#       --destination "ben0i0d/jupyter:go-c"
 # rust-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -212,7 +212,7 @@ pyjo-c-build:
 #       --build-arg "NO_PROXY=127.0.0.1,localhost,172.0.0.0/8,192.0.0.0/8"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:rust-c"
+#       --destination "ben0i0d/jupyter:rust-c"
 # julia-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -223,7 +223,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:julia-c"
+#       --destination "ben0i0d/jupyter:julia-c"
 # scir-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -235,7 +235,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scir-c"
+#       --destination "ben0i0d/jupyter:scir-c"
 # rspark-c-build:
 #   stage: build
 #   needs: [scir-c-build] # 
@@ -247,7 +247,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:rspark-c"
+#       --destination "ben0i0d/jupyter:rspark-c"
 # agda-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -258,7 +258,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:agda-c"
+#       --destination "ben0i0d/jupyter:agda-c"
 # ansible-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -269,7 +269,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:ansible-c"
+#       --destination "ben0i0d/jupyter:ansible-c"
 # dyalog-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -280,7 +280,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:dyalog-c"
+#       --destination "ben0i0d/jupyter:dyalog-c"
 # cadabra-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -291,7 +291,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:cadabra-c"
+#       --destination "ben0i0d/jupyter:cadabra-c"
 # chapel-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -302,7 +302,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:chapel-c"
+#       --destination "ben0i0d/jupyter:chapel-c"
 # lua-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -313,7 +313,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:lua-c"
+#       --destination "ben0i0d/jupyter:lua-c"
 # sql-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -324,7 +324,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:sql-c"
+#       --destination "ben0i0d/jupyter:sql-c"
 # sage-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -336,7 +336,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:sage-c"
+#       --destination "ben0i0d/jupyter:sage-c"
 # dotnet-c-build:
 #   stage: build
 #   needs: [up-c-build]
@@ -347,7 +347,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:dotnet-c"
+#       --destination "ben0i0d/jupyter:dotnet-c"
 # octave-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -359,7 +359,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:octave-c"
+#       --destination "ben0i0d/jupyter:octave-c"
 # scilab-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -371,7 +371,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scilab-c"
+#       --destination "ben0i0d/jupyter:scilab-c"
 # mathematica-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -383,7 +383,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:mathematica-c"
+#       --destination "ben0i0d/jupyter:mathematica-c"
 # maple-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -395,7 +395,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:maple-c"
+#       --destination "ben0i0d/jupyter:maple-c"
 # matlab-c-minimal-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -407,7 +407,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:matlab-c-minimal"
+#       --destination "ben0i0d/jupyter:matlab-c-minimal"
 # matlab-c-mcm-build:
 #   stage: build
 #   needs: [matlab-c-minimal-build] # 
@@ -419,7 +419,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:matlab-c-mcm"
+#       --destination "ben0i0d/jupyter:matlab-c-mcm"
 
 # up-g-build:
 #   stage: build
@@ -431,7 +431,7 @@ pyjo-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:up-g"
+#       --destination "ben0i0d/jupyter:up-g"
 # pyjo-g-build:
 #   stage: build
 #   needs: [up-g-build] # 
@@ -448,7 +448,7 @@ pyjo-c-build:
 #       --build-arg "NO_PROXY=127.0.0.1,localhost,172.0.0.0/8,192.0.0.0/8"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjo-g"
+#       --destination "ben0i0d/jupyter:pyjo-g"
 # scipyjo-g-build:
 #   stage: build
 #   needs: [pyjo-g-build] # 
@@ -466,7 +466,7 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scipyjo-g"
+#       --destination "ben0i0d/jupyter:scipyjo-g"
 # pyjoai-g-build:
 #   stage: build
 #   needs: [scipyjo-g-build] # 
@@ -478,4 +478,4 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:pyjoai-g"
+#       --destination "ben0i0d/jupyter:pyjoai-g"

@@ -1,4 +1,4 @@
-FROM eoelab.org:1032/build-image-stacks/jupyter-image-stacks/jupyter:scir-c
+FROM ben0i0d/jupyter:scir-c
 
  
 
