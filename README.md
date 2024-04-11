@@ -76,16 +76,16 @@ Specify the image in the profile of the singleuser
 ### Image dependencies
 ```mermaid
 graph LR
-BASE-->PROGRAM{PROGRAMLANG}
+Python-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PC(Julia)
 PROGRAM-->PD(SciR)-->PDA(Rspark)
-PROGRAM-->PR(python)
-PR-->PRA(Scipy)
-PR-->PRB(Scrpy)
+PROGRAM-->PR(mojo)
+Python-->PRA(Scipy)
+Python-->PRB(Scrpy)
 PRA-->PRAA(pyai)  
 PRA-->PRAB(pyspark)  
 PRA-->PRAC(pyflink)  
-BASE-->MATH{MATH-TOOL}-->MA(Octave)
+Python-->MATH{MATH-TOOL}-->MA(Octave)
 MATH-->MB(Scilab)
 MATH-->MC(Sagemath)
 MATH-->ME(Mathematica)
