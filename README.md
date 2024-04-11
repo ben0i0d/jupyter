@@ -1,16 +1,12 @@
 # jupyter-image-stacks
 
+## Jupyter For Data-Science
+
 English | [中文](README_CN.md)
 
 **THIS doc for non-CN USER**
 
 **dockerhub: https://hub.docker.com/r/ben0i0d/jupyter**
-
-## Jupyter For Data-Science
-
-we have decide to remove some images from the repo, because they are not maintained and are not suitable for production use.
-
-we decide add coder or denv for these 
 
 ### HOW TO USE
 **Docker**
@@ -28,13 +24,7 @@ Specify the image in the profile of the singleuser
 ### Global description
 1. If you build or fork the image yourself, replace the base image in the Dockerfile with the image on DockerHub
 2. For commercial software such as Mathematica, MATLAB, etc., we only provide packaging, and the specific activation method and possible consequences are borne by the user
-3. We hide '__pycache__' by default, i.e. it is not visible in the file browser view
-5. For ohmyzsh, you only need to execute the following code once inside the terminal
-```
-git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
-cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-```
-7. The following code is applicable to add support for conda virtual directories so that custom environments are not lost
+3. The following code is applicable to add support for conda virtual directories so that custom environments are not lost
     1. Data persistence
         * docker add `-v "DATA-VOLUME":/opt/conda/envs/`
         * Jupyterhub add mountpoint`/opt/conda/envs/`

@@ -19,7 +19,7 @@ c.InlineBackend.figure_formats = {"png", "jpeg", "svg", "pdf"}
 c.FileContentsManager.delete_to_trash = False
 
 # config hide file
-c.FileContentsManager.hide_globs=['__pycache__']
+c.FileContentsManager.hide_globs=[]
 
 # Generate a self-signed certificate
 OPENSSL_CONFIG = """\

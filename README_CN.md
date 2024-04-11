@@ -1,14 +1,12 @@
 # jupyter-image-stacks
 
+## Jupyter 项目为了数据科学
+
 English | [中文](README_CN.md)
 
 **为中国用户的文档**
 
 **我们的docker镜像仓库是 https://hub.docker.com/r/ben0i0d/jupyter**
-
-## Jupyter 项目为了数据科学
-
-我们决定移除一些镜像，因为它们不被维护且不适合生产用途，我们计划使用coder与denv项目等补全
 
 ### 如何使用
 **Docker**
@@ -27,13 +25,7 @@ English | [中文](README_CN.md)
 1. 在终端下运行`pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple`完成pip换源
 2. 如果自行构建或派生，替换dockerfile中的基础镜像为dockerhub上的镜像
 3. 对于例如Mathematica，MATLAB等商业软件，我们只提供打包，具体激活方式及可能带来的后果由用户承担
-4. 我们默认隐藏`__pycache__`，即在文件浏览器视图中不可见
-5. 对于ohmyzsh，在terminal内只需执行以下代码一次即可
-```
-git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
-cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-```
-6. 以下代码适用于解决matplotlib绘图缺失中文字体
+4. 以下代码适用于解决matplotlib绘图缺失中文字体
 ```
 from matplotlib.font_manager import FontProperties
 # 设置中文字体路径
