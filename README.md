@@ -5,6 +5,13 @@ English | [中文](README_CN.md)
 **THIS doc for non-CN USER**
 
 **dockerhub: https://hub.docker.com/r/ben0i0d/jupyter**
+
+## Jupyter For Data-Science
+
+we have decide to remove some images from the repo, because they are not maintained and are not suitable for production use.
+
+we decide add coder or denv for these 
+
 ### HOW TO USE
 **Docker**
 * No data is used persistently：`docker run -d -p 8888:8888 ben0i0d/jupyter:<tag>`  
@@ -40,7 +47,6 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
         2. By default, we add the domain certificate of eoelab.org, which does not pose any security issues
         3. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
         4. Provided packages: SHELL (zsh), file compression/extraction (.bz2|.zip|.7z), project management (git|git-lfs), certificate management (ca-certificates), editor (vim), network interaction (curl|wget), Chinese fonts (fonts-wqy-zenhei)
-* Llinux (With Desktop-GUI): Learn Linux systems without privileges, providing Xfce desktop support
 * Pyjo: Supports Python and Mojo, combining Python syntax with the ecosystem for production and research. Mojo features metaprogramming capabilities. We look forward to the improvements this environment will bring.
     * Description
         1. Mojo has been merged into Python. Due to network reasons, manual execution of `modular install mojo && python /opt/modular/pkg/packages.modular.com_mojo/jupyter/manage_kernel.py install` is required to add the kernel
@@ -49,27 +55,11 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
     * Pyjospark: Provides a Python-based Spark programming interface for large-scale data processing and analysis, offering powerful parallel computing capabilities and rich data manipulation functions, suitable for efficient data processing and machine learning tasks in distributed environments.
     * Pyjoflink: Provides a Python-based Flink programming interface for stateful computation of unbounded and bounded data streams. It also offers batch processing APIs for processing batch data computations based on stream computing engines.
     * Pyjoai (With GPU): Provides a common AI toolchain, offering a rich set of deep learning frameworks and NLP model libraries, enabling developers to easily build and train various AI models for applications in image recognition, natural language processing, etc.
-* C: Supports C (versions ≥ C89), a general-purpose programming language, low-level and efficient, widely used in system-level development and embedded devices.
-* CPP: Supports CPP (11,14,17), a multi-paradigm programming language, an extension of the C language, with object-oriented and generic programming capabilities, widely used in system-level development and large-scale software projects.
-* Cadabra: Supports Cadabra (Cadabra2), a software system based on symbolic computation, specifically designed for complex algebraic computations and tensor analysis, suitable for use in theoretical physics and relativity research.
 * Julia: Supports Julia, a high-performance, dynamic programming language designed for scientific computing and data analysis, with readability similar to Python and execution speed similar to C.
     * Description:
         1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
 * SciR: Supports R's scientific computing environment, a programming language for statistical analysis and data visualization, with rich data processing libraries and powerful statistical functions, widely used in data science and research fields.
   * Rspark: Provides an R-based Spark programming interface for running R code on Spark. It offers R language capabilities in big data processing and distributed environments, enabling efficient data manipulation, machine learning, and statistical analysis for large-scale data processing and analysis tasks.
-* Haskell: Supports Haskell, a purely functional programming language emphasizing expressiveness and static type checking, providing powerful pattern matching and higher-order function support, suitable for functional programming enthusiasts and academic research.
-* Java: Supports Java, a general-purpose object-oriented programming language with cross-platform features and a vast ecosystem, widely used in enterprise development, mobile applications, and large software projects.
-* Kotlin: Supports Kotlin, a modern, statically typed programming language with good interoperability with Java, offering more concise, safe, and efficient syntax, used for Android development and cross-platform applications.
-* JavaScript: Supports JavaScript, a widely used scripting language for web development, used to implement interactivity and dynamic effects, also applicable to server-side development and mobile applications.
-* Go: Supports Go, a concise, efficient programming language focusing on concurrency and performance, suitable for building scalable network services, widely used in cloud computing, distributed systems, and network programming fields.
-* Rust: Supports Rust, a safe, concurrent, and high-performance systems programming language emphasizing memory and thread safety, suitable for developing efficient and reliable system software such as operating systems, network services, and embedded devices.
-* Fortran: Supports Fortran, one of the earliest high-level programming languages, used for scientific computing and numerical analysis, particularly adept at handling large-scale, complex numerical computing problems, still widely used in the scientific field.
-* Ansible: Supports Ansible, an open-source automation tool used for configuration management, deployment, and orchestration tasks, widely used in server management and system automation, simplifying complex IT operation workflows.
-* Agda: Supports Agda, a dependent type functional programming language and interactive proof tool, emphasizing formal verification and program correctness, widely popular in formal methods and type theory research.
-* APL (Dyalog): Supports APL (Dyalog), a symbolic array programming language known for its expressive and concise syntax, suitable for high-dimensional data processing, mathematical modeling, and algorithm development, with Dyalog being one popular implementation version.
-* Chapel: Supports Chapel, a concurrency programming language for high-performance parallel programming, aimed at simplifying distributed computing and large-scale data processing, with ease of use and portability, suitable for scientific computing, parallel algorithms, and parallel task scheduling.
-* Lua: Supports Lua, a lightweight, embeddable scripting language with a concise syntax and fast execution speed, widely used in game development, embedded systems, and script extensions.
-* SQL: Supports SQL, a language used for managing and processing relational databases. It is a standardized language commonly used for executing various operations such as creating, modifying, and deleting tables in databases, as well as retrieving, inserting, updating, and deleting data in tables. The environment includes the duckdb database.
 * Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
 * Dotnet: A cross-platform development framework that supports C#, F#, and PW, used for building various types of applications including web applications, desktop applications, and mobile applications. It provides rich class libraries and tools, simplifying development processes, and has high performance and scalability.
 * Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
@@ -98,29 +88,10 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 ### Image dependencies
 ```mermaid
 graph LR
-BASE-->ENV{ENVIRONMENT}-->EA(Dotnet)
-ENV-->EB(Llinux)
 BASE-->PROGRAM{PROGRAMLANG}
-PROGRAM-->PA(C)
-PROGRAM-->PB(CPP)
 PROGRAM-->PC(Julia)
 PROGRAM-->PD(SciR)-->PDA(Rspark)
-PROGRAM-->PE(Go)
-PROGRAM-->PF(Rust)
-PROGRAM-->PG(Java)
-PROGRAM-->PH(Kotlin)
-PROGRAM-->PI(JavaSript)
-PROGRAM-->PJ(Raku:Perl6)
-PROGRAM-->PK(Lua)
-PROGRAM-->PL(Fortran)
-PROGRAM-->PM(Ansible)
-PROGRAM-->PN(Agda)
-PROGRAM-->PO(APL:Dyalog)
-PROGRAM-->PP(Cadabra)
-PROGRAM-->PQ(Haskell)
 PROGRAM-->PR(Pyjo)
-PROGRAM-->PS(Q#)
-PROGRAM-->PT(SQL)
 PR-->PRA(Scipyjo)
 PR-->PRB(Scrpyjo)
 PRA-->PRAA(Pyjoai)  
@@ -139,27 +110,18 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 * cuda 12.2.0
 * Python 3.11
 * Julia 1.9.4
-* Java openjdk-17
-* kotlin(jre) openjdk-17-jre
-* Dotnet 7.0
 * spark 3.5.0
 * jupyterlab 4
 * Matlab R2023b
 * Mathematica 13.3.1
 * Maple 2023
-* Flink 
 
-**Image source**
+**Mirror source**
 * conda bfsu：https://mirrors.bfsu.edu.cn/help/anaconda/
 * pip bfsu：https://mirrors.bfsu.edu.cn/help/pypi/
 * apt ustc：https://mirrors.ustc.edu.cn/help/debian.html
-* npm npmmirror(AliYun): https://registry.npmmirror.com/
 * apache tuna: https://mirrors.tuna.tsinghua.edu.cn/apache/
 * julia-pkg ustc: https://mirrors.ustc.edu.cn/julia/
-* hackage ustc: https://mirrors.ustc.edu.cn/hackage/
-* Stackage ustc: https://mirrors.ustc.edu.cn/stackage/
-* GO AliYun: https://mirrors.aliyun.com/goproxy/
-* cargo ustc: git://mirrors.ustc.edu.cn/crates.io-index
 
 ### Upstream of the project
 jupyter团队项目 https://github.com/jupyter/docker-stacks
@@ -167,30 +129,12 @@ jupyter团队项目 https://github.com/jupyter/docker-stacks
 **However, we are quite different from the upstream in terms of sources, packages, localizations, extensions, etc., so if you have a problem with this project, please do not ask the Jupyter team questions, as it will increase their workload**
 
 ### kernel
-* C: https://github.com/XaverKlemenschits/jupyter-c-kernel
-* Cpp: https://github.com/jupyter-xeus/xeus-cling
 * Python：https://ipython.org/
-* Go: https://github.com/gopherdata/gophernotes
-* Haskell: https://github.com/gibiansky/IHaskell
-* Java: https://github.com/SpencerPark/IJava
-* JavaScript: https://github.com/n-riesco/ijavascript
 * Julia: https://github.com/JuliaLang/IJulia.jl
 * R: http://irkernel.github.io/
-* Rust: https://github.com/evcxr/evcxr
-* agda: https://github.com/lclem/agda-kernel
-* ansible: https://github.com/ansible/ansible-jupyter-kernel
 * Octave: https://github.com/Calysto/octave_kernel
-* Dotnet(C#,F#,Powershell)： https://github.com/dotnet/interactive
-* Kotlin: https://github.com/Kotlin/kotlin-jupyter
-* Fortran: https://github.com/lfortran/lfortran
-* APL (Dyalog): https://github.com/Dyalog/dyalog-jupyter-kernel
-* Raku(Perl6): https://github.com/bduggan/raku-jupyter-kernel
-* Lua: https://github.com/guysv/ilua
-* Cadabra: https://github.com/kpeeters/cadabra2
-* Chapel: http://github.com/krishnadey30/jupyter_kernel_chapel
-* SQL: https://github.com/suyin1203/duckdb_kernel
-* NoVNC: https://github.com/jupyterhub/jupyter-remote-desktop-proxy
 * MATLAB: https://github.com/mathworks/jupyter-matlab-proxy
+
 ## Necessary copyright notice
 For code derived from other teams, we added the original copyright notice to the file header, and we retain and support the copyrights of other development teams
 
