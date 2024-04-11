@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:pyjo-g
+FROM ben0i0d/jupyter:py-g
 
  
 

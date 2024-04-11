@@ -15,34 +15,34 @@ before_script:
 #       --cache=false
 #       --snapshot-mode=redo
 #       --destination "ben0i0d/jupyter:up-c"
-pyjo-c-build:
+py-c-build:
   stage: build
   needs: [] # up-c-build
   script:
-    - cd pyjo/cpu
+    - cd py/cpu
     - /kaniko/executor
       --context ./
       --dockerfile "Dockerfile"
       --cache=false
       --snapshot-mode=redo
-      --destination "ben0i0d/jupyter:pyjo-c"
-# scipyjo-c-build:
+      --destination "ben0i0d/jupyter:py-c"
+# scipy-c-build:
 #   stage: build
-#   needs: [pyjo-c-build] # 
+#   needs: [py-c-build] # 
 #   script:
-#     - cd scipyjo/cpu
+#     - cd scipy/cpu
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:scipyjo-c"
-# scrpyjo-c-build:
+#       --destination "ben0i0d/jupyter:scipy-c"
+# scrpy-c-build:
 #   stage: build
-#   needs: [pyjo-c-build] # 
+#   needs: [py-c-build] # 
 #   script:
-#     - cd scrpyjo
+#     - cd scrpy
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
@@ -54,43 +54,43 @@ pyjo-c-build:
 #       --build-arg "NO_PROXY=127.0.0.1,localhost,172.0.0.0/8,192.0.0.0/8"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:scrpyjo-c"
-# pyjospark-c-build:
+#       --destination "ben0i0d/jupyter:scrpy-c"
+# pyspark-c-build:
 #   stage: build
-#   needs: [scipyjo-c-build] # 
+#   needs: [scipy-c-build] # 
 #   script:
-#     - cd pyjospark
+#     - cd pyspark
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:pyjospark-c"
-# pyjoflink-c-build:
+#       --destination "ben0i0d/jupyter:pyspark-c"
+# pyflink-c-build:
 #   stage: build
-#   needs: [scipyjo-c-build] # 
+#   needs: [scipy-c-build] # 
 #   script:
-#     - cd pyjoflink
+#     - cd pyflink
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:pyjoflink-c"
-# pyjoai-c-build:
+#       --destination "ben0i0d/jupyter:pyflink-c"
+# pyai-c-build:
 #   stage: build
-#   needs: [scipyjo-c-build] # 
+#   needs: [scipy-c-build] # 
 #   script:
-#     - cd pyjoai/cpu
+#     - cd pyai/cpu
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:pyjoai-c"
+#       --destination "ben0i0d/jupyter:pyai-c"
 # llinux-c-build:
 #   stage: build
 #   needs: [up-c-build] # 
@@ -432,11 +432,11 @@ pyjo-c-build:
 #       --cache=false
 #       --snapshot-mode=redo
 #       --destination "ben0i0d/jupyter:up-g"
-# pyjo-g-build:
+# py-g-build:
 #   stage: build
 #   needs: [up-g-build] # 
 #   script:
-#     - cd pyjo/gpu
+#     - cd py/gpu
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
@@ -448,12 +448,12 @@ pyjo-c-build:
 #       --build-arg "NO_PROXY=127.0.0.1,localhost,172.0.0.0/8,192.0.0.0/8"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:pyjo-g"
-# scipyjo-g-build:
+#       --destination "ben0i0d/jupyter:py-g"
+# scipy-g-build:
 #   stage: build
-#   needs: [pyjo-g-build] # 
+#   needs: [py-g-build] # 
 #   script:
-#     - cd scipyjo/gpu
+#     - cd scipy/gpu
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
@@ -466,16 +466,16 @@ pyjo-c-build:
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:scipyjo-g"
-# pyjoai-g-build:
+#       --destination "ben0i0d/jupyter:scipy-g"
+# pyai-g-build:
 #   stage: build
-#   needs: [scipyjo-g-build] # 
+#   needs: [scipy-g-build] # 
 #   script:
-#     - cd pyjoai/gpu
+#     - cd pyai/gpu
 #     - /kaniko/executor
 #       --context ./
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --compressed-caching=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:pyjoai-g"
+#       --destination "ben0i0d/jupyter:pyai-g"

@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:scipyjo-c
+FROM ben0i0d/jupyter:scipy-c
 
  
 
