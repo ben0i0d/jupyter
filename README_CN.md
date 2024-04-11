@@ -22,10 +22,9 @@ English | [中文](README_CN.md)
         image: ben0i0d/jupyter:scipy-c
 ```
 ### 全局说明
-1. 在终端下运行`pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple`完成pip换源
-2. 如果自行构建或派生，替换dockerfile中的基础镜像为dockerhub上的镜像
-3. 对于例如Mathematica，MATLAB等商业软件，我们只提供打包，具体激活方式及可能带来的后果由用户承担
-4. 以下代码适用于解决matplotlib绘图缺失中文字体
+1. 如果自行构建或派生，替换dockerfile中的基础镜像为dockerhub上的镜像
+2. 对于例如Mathematica，MATLAB等商业软件，我们只提供打包，具体激活方式及可能带来的后果由用户承担
+3. 以下代码适用于解决matplotlib绘图缺失中文字体
 ```
 from matplotlib.font_manager import FontProperties
 # 设置中文字体路径
@@ -33,7 +32,7 @@ zh_font = FontProperties(fname="/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc")
 # 将中文字体设置为默认字体
 plt.rcParams["font.family"] = zh_font.get_name()
 ```
-7. 以下代码适用于增加对conda虚拟目录的支持，以实现自定义环境不丢失
+4. 以下代码适用于增加对conda虚拟目录的支持，以实现自定义环境不丢失
     1. 数据持久化
         * docker启动时添加`-v "DATA-VOLUME":/opt/conda/envs/`
         * Jupyterhub添加额外挂载点到`/opt/conda/envs/`
@@ -45,7 +44,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
         1. 上游已经切换到`debian:trixie`，GPU上游镜像也基于`debian:trixie`二次构建了镜像
         2. 默认情况下我们添加了eoelab.org的域名证书，这不会带来安全问题
         3. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
-        4. 提供软件包：SHELL(zsh)，文件压缩/解压(.bz2|.zip|.7z)，项目管理(git|git-lfs),证书管理(ca-certificates)，编辑器（vim）,网络交互（curl|wget）,中文字体（fonts-wqy-zenhei）
+        4. 提供软件包：文件压缩/解压(.zip)，项目管理(git),中文字体（fonts-wqy-zenhei）
 * Llinux（With Desktop-GUI）：在无特权的情况下学习Linux系统，提供Xfce桌面支持   
 * Python：支持Python，通过将python语法与生态系统相结合进行生产与研究。
     * Scipy：提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
