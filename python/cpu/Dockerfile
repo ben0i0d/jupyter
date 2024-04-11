@@ -17,7 +17,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Copy files
 COPY cert/cert.pem /usr/local/share/ca-certificates/eoelab.org.crt
 COPY conf/pip.conf /etc/
-COPY conf/fix-permissions start-sh/* /usr/local/bin/
+COPY start-sh/* /usr/local/bin/
 COPY conf/jupyter_server_config.py /etc/jupyter/
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \

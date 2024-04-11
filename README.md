@@ -46,8 +46,6 @@ Specify the image in the profile of the singleuser
 * Julia: Supports Julia, a high-performance, dynamic programming language designed for scientific computing and data analysis, with readability similar to Python and execution speed similar to C.
     * Description:
         1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
-* SciR: Supports R's scientific computing environment, a programming language for statistical analysis and data visualization, with rich data processing libraries and powerful statistical functions, widely used in data science and research fields.
-  * Rspark: Provides an R-based Spark programming interface for running R code on Spark. It offers R language capabilities in big data processing and distributed environments, enabling efficient data manipulation, machine learning, and statistical analysis for large-scale data processing and analysis tasks.
 * Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
 * Dotnet: A cross-platform development framework that supports C#, F#, and PW, used for building various types of applications including web applications, desktop applications, and mobile applications. It provides rich class libraries and tools, simplifying development processes, and has high performance and scalability.
 * Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
@@ -78,7 +76,6 @@ Specify the image in the profile of the singleuser
 graph LR
 Python-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PC(Julia)
-PROGRAM-->PD(SciR)-->PDA(Rspark)
 PROGRAM-->PR(mojo)
 Python-->PRA(Scipy)
 Python-->PRB(Scrpy)
