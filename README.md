@@ -47,14 +47,12 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
         2. By default, we add the domain certificate of eoelab.org, which does not pose any security issues
         3. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
         4. Provided packages: SHELL (zsh), file compression/extraction (.bz2|.zip|.7z), project management (git|git-lfs), certificate management (ca-certificates), editor (vim), network interaction (curl|wget), Chinese fonts (fonts-wqy-zenhei)
-* Pyjo: Supports Python and Mojo, combining Python syntax with the ecosystem for production and research. Mojo features metaprogramming capabilities. We look forward to the improvements this environment will bring.
-    * Description
-        1. Mojo has been merged into Python. Due to network reasons, manual execution of `modular install mojo && python /opt/modular/pkg/packages.modular.com_mojo/jupyter/manage_kernel.py install` is required to add the kernel
-    * Scipyjo: Provides a scientific computing environment for Python, offering rich numerical computation, optimization, signal processing, statistical analysis, etc., for scientific research and engineering applications.
-    * Scrpyjo: Provides a web scraping environment for Python, used for extracting data from the internet, automating information gathering and analysis tasks, suitable for data mining, web scraping, and business intelligence collection applications.
-    * Pyjospark: Provides a Python-based Spark programming interface for large-scale data processing and analysis, offering powerful parallel computing capabilities and rich data manipulation functions, suitable for efficient data processing and machine learning tasks in distributed environments.
-    * Pyjoflink: Provides a Python-based Flink programming interface for stateful computation of unbounded and bounded data streams. It also offers batch processing APIs for processing batch data computations based on stream computing engines.
-    * Pyjoai (With GPU): Provides a common AI toolchain, offering a rich set of deep learning frameworks and NLP model libraries, enabling developers to easily build and train various AI models for applications in image recognition, natural language processing, etc.
+* Python: Supports Python , combining Python syntax with the ecosystem for production and research.
+    * Scipy: Provides a scientific computing environment for Python, offering rich numerical computation, optimization, signal processing, statistical analysis, etc., for scientific research and engineering applications.
+    * Scrpy: Provides a web scraping environment for Python, used for extracting data from the internet, automating information gathering and analysis tasks, suitable for data mining, web scraping, and business intelligence collection applications.
+    * pyspark: Provides a Python-based Spark programming interface for large-scale data processing and analysis, offering powerful parallel computing capabilities and rich data manipulation functions, suitable for efficient data processing and machine learning tasks in distributed environments.
+    * pyflink: Provides a Python-based Flink programming interface for stateful computation of unbounded and bounded data streams. It also offers batch processing APIs for processing batch data computations based on stream computing engines.
+    * pyai (With GPU): Provides a common AI toolchain, offering a rich set of deep learning frameworks and NLP model libraries, enabling developers to easily build and train various AI models for applications in image recognition, natural language processing, etc.
 * Julia: Supports Julia, a high-performance, dynamic programming language designed for scientific computing and data analysis, with readability similar to Python and execution speed similar to C.
     * Description:
         1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
@@ -91,12 +89,12 @@ graph LR
 BASE-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PC(Julia)
 PROGRAM-->PD(SciR)-->PDA(Rspark)
-PROGRAM-->PR(Pyjo)
-PR-->PRA(Scipyjo)
-PR-->PRB(Scrpyjo)
-PRA-->PRAA(Pyjoai)  
-PRA-->PRAB(Pyjospark)  
-PRA-->PRAC(Pyjoflink)  
+PROGRAM-->PR(python)
+PR-->PRA(Scipy)
+PR-->PRB(Scrpy)
+PRA-->PRAA(pyai)  
+PRA-->PRAB(pyspark)  
+PRA-->PRAC(pyflink)  
 BASE-->MATH{MATH-TOOL}-->MA(Octave)
 MATH-->MB(Scilab)
 MATH-->MC(Sagemath)
@@ -124,7 +122,7 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 * julia-pkg ustc: https://mirrors.ustc.edu.cn/julia/
 
 ### Upstream of the project
-jupyter团队项目 https://github.com/jupyter/docker-stacks
+https://github.com/jupyter/docker-stacks
 
 **However, we are quite different from the upstream in terms of sources, packages, localizations, extensions, etc., so if you have a problem with this project, please do not ask the Jupyter team questions, as it will increase their workload**
 

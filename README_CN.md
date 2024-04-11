@@ -55,14 +55,12 @@ plt.rcParams["font.family"] = zh_font.get_name()
         3. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
         4. 提供软件包：SHELL(zsh)，文件压缩/解压(.bz2|.zip|.7z)，项目管理(git|git-lfs),证书管理(ca-certificates)，编辑器（vim）,网络交互（curl|wget）,中文字体（fonts-wqy-zenhei）
 * Llinux（With Desktop-GUI）：在无特权的情况下学习Linux系统，提供Xfce桌面支持   
-* Pyjo：支持Python与Mojo，通过将python语法与生态系统相结合进行生产与研究，mojo具备元编程特性。我们期待这一环境带来的改进
-    * 说明
-        1. Mojo被合并进Python,由于网络原因需要手动执行`modular install mojo && python /opt/modular/pkg/packages.modular.com_mojo/jupyter/manage_kernel.py install `完成添加kernel
-    * Scipyjo：提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
-    * Scrpyjo: 提供Python的网页采取环境，用于提取互联网上的数据，实现自动化的信息收集和分析任务，适用于数据挖掘、网络爬虫以及业务情报收集等应用场景。
-    * Pyjospark: 提供基于Python的Spark编程接口，用于大规模数据处理和分析，提供了强大的并行计算能力和丰富的数据操作函数，适合在分布式环境中进行高效的数据处理和机器学习任务。
-    * Pyjoflink: 提供基于Python的Flink编程接口，用于对无边界和有边界的数据流进行有状态的计算,也提供了批处理API，用于基于流式计算引擎处理批量数据的计算能力。
-    * Pyjoai（With GPU）：提供常用AI工具链，提供了丰富的深度学习框架和NLP模型库，使开发人员能够轻松构建和训练各种人工智能模型，并应用于图像识别、自然语言处理等领域。
+* Python：支持Python，通过将python语法与生态系统相结合进行生产与研究。
+    * Scipy：提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
+    * Scrpy: 提供Python的网页采取环境，用于提取互联网上的数据，实现自动化的信息收集和分析任务，适用于数据挖掘、网络爬虫以及业务情报收集等应用场景。
+    * pyspark: 提供基于Python的Spark编程接口，用于大规模数据处理和分析，提供了强大的并行计算能力和丰富的数据操作函数，适合在分布式环境中进行高效的数据处理和机器学习任务。
+    * pyflink: 提供基于Python的Flink编程接口，用于对无边界和有边界的数据流进行有状态的计算,也提供了批处理API，用于基于流式计算引擎处理批量数据的计算能力。
+    * pyai（With GPU）：提供常用AI工具链，提供了丰富的深度学习框架和NLP模型库，使开发人员能够轻松构建和训练各种人工智能模型，并应用于图像识别、自然语言处理等领域。
 * Julia：支持Julia，高性能、动态的编程语言，设计用于科学计算和数据分析，具备类似Python的易读性和类似C的执行速度。
     * 说明：
         1. Julia镜像中的环境变量`JULIA_NUM_THREADS`，请在启动时根据理想的并发线程数进行配置
@@ -98,12 +96,12 @@ graph LR
 BASE-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PC(Julia)
 PROGRAM-->PD(SciR)-->PDA(Rspark)
-PROGRAM-->PR(Pyjo)
-PR-->PRA(Scipyjo)
-PR-->PRB(Scrpyjo)
-PRA-->PRAA(Pyjoai)  
-PRA-->PRAB(Pyjospark)  
-PRA-->PRAC(Pyjoflink)  
+PROGRAM-->PR(python)
+PR-->PRA(Scipy)
+PR-->PRB(Scrpy)
+PRA-->PRAA(pyai)  
+PRA-->PRAB(pyspark)  
+PRA-->PRAC(pyflink)  
 BASE-->MATH{MATH-TOOL}-->MA(Octave)
 MATH-->MB(Scilab)
 MATH-->MC(Sagemath)
