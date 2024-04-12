@@ -1,7 +1,5 @@
 FROM ben0i0d/jupyter:matlab-c-minimal
 
- 
-
 USER root
 
 COPY conf/mpm_input_r2023b.txt /opt/mpm_input_r2023b.txt
