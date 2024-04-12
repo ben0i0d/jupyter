@@ -1,39 +1,21 @@
-FROM ben0i0d/jupyter:up-c
+FROM ben0i0d/jupyter:py-c
 
 USER root
 
-# Julia dependencies
-# install Julia packages in /opt/julia instead of ${HOME}
+# install Julia packages in /opt/julia
 ENV JULIA_DEPOT_PATH=/opt/julia \
-    JULIA_PKGDIR=/opt/julia \
-    JULIA_VERSION=1.9.4 \
     JULIA_PKG_SERVER=https://mirrors.ustc.edu.cn/julia \
     JULIA_NUM_THREADS=12
-WORKDIR /tmp
 
-# hadolint ignore=SC2046
-RUN julia_installer="julia-${JULIA_VERSION}-linux-x86_64.tar.gz" && julia_major_minor=$(echo "${JULIA_VERSION}" | cut -d. -f 1,2) && \
-    mkdir "/opt/julia-${JULIA_VERSION}" && \
-    wget -q "https://mirrors.tuna.tsinghua.edu.cn/julia-releases/bin/linux/x64/${julia_major_minor}/${julia_installer}" && \
-    tar xzf "${julia_installer}" -C "/opt/julia-${JULIA_VERSION}" --strip-components=1 && \
-    rm "${julia_installer}" && \
-    ln -fs /opt/julia-*/bin/julia /usr/local/bin/julia && \
-    mkdir /etc/julia && \
-    echo "push!(Libdl.DL_LOAD_PATH, \"${CONDA_DIR}/lib\")" >> /etc/julia/juliarc.jl && \
-    mkdir "${JULIA_PKGDIR}" && \
-    chown "${NB_USER}" "${JULIA_PKGDIR}" && \
-    fix-permissions "${JULIA_PKGDIR}"
+RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    pip install jill && jill install --confirm
 
 USER ${NB_UID}
 # Add Julia packages.
-# Install IJulia as jovyan and then move the kernelspec out
-# to the system share location. Avoids problems with runtime UID change not
-# taking effect properly on the .local folder in the jovyan home dir.
+# Install IJulia as jovyan and then move the kernelspec out to the system share location. 
 RUN julia -e 'import Pkg; Pkg.update()' && \
     julia -e 'using Pkg; pkg"add IJulia"; pkg"precompile"' && \
-    mv "${HOME}/.local/share/jupyter/kernels/julia"* "${CONDA_DIR}/share/jupyter/kernels/" && \
-    chmod -R go+rx "${CONDA_DIR}/share/jupyter" && \
-    rm -rf "${HOME}/.local" && \
-    fix-permissions "${JULIA_PKGDIR}" "${CONDA_DIR}/share/jupyter"
+    mv "${HOME}/.local/share/jupyter/kernels/julia"* "/opt/base/share/jupyter/kernels/" && \
+    chmod -R go+rx "/opt/base//share/jupyter" && \
+    rm -rf "${HOME}/.local" 
 
-WORKDIR "${HOME}"

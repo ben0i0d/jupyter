@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:up-c
+FROM ben0i0d/jupyter:py-c
 
  
 
