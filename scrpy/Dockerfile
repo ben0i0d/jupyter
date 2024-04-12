@@ -1,13 +1,8 @@
 FROM ben0i0d/jupyter:py-c
 
- 
-
 USER root
-# install system dependencies
-RUN apt-get update && apt-get -y install gcc make
-#add chrome source
-COPY linux_signing_key.pub ./linux_signing_key.pub
-RUN apt-key add linux_signing_key.pub && \
+
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && \
     sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
 # install chrome
     apt-get update && apt-get -y install google-chrome-stable && \
@@ -16,9 +11,7 @@ RUN apt-key add linux_signing_key.pub && \
     wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip  && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/ && \
 # Install Python 3 packages
-    mamba install --yes 'beautifulsoup4' 'requests' 'selenium' 'schedule' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+    pip install 'beautifulsoup4' 'requests' 'selenium' 'schedule' && \
+    pip cache purge 
 
 USER ${NB_UID}

@@ -1,6 +1,6 @@
 # jupyter-image-stacks
 
-## Jupyter 项目为了数据科学
+## Jupyter 项目为了数据科学 (如果你看到了我，暂时不要使用这个项目，我们正在重构)
 
 English | [中文](README_CN.md)
 
