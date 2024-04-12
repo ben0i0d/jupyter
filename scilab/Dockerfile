@@ -17,7 +17,6 @@ RUN apt-get update --yes && \
 
 USER $NB_USER
 
-RUN mamba install -y websockify && \
-    pip install jupyter-remote-desktop-proxy scilab_kernel && \
-    pip cache purge && mamba clean --all -f -y 
+RUN pip install websockify jupyter-remote-desktop-proxy scilab_kernel && \
+    pip cache purge 
     

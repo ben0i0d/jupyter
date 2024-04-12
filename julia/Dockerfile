@@ -1,7 +1,5 @@
 FROM ben0i0d/jupyter:up-c
 
- 
-
 USER root
 
 # Julia dependencies
@@ -10,7 +8,7 @@ ENV JULIA_DEPOT_PATH=/opt/julia \
     JULIA_PKGDIR=/opt/julia \
     JULIA_VERSION=1.9.4 \
     JULIA_PKG_SERVER=https://mirrors.ustc.edu.cn/julia \
-    JULIA_NUM_THREADS=24
+    JULIA_NUM_THREADS=12
 WORKDIR /tmp
 
 # hadolint ignore=SC2046
