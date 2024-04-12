@@ -97,7 +97,7 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 * cuda 12.2.0
 * Python 3.11
 * Julia latest
-* spark 3.5.0
+* spark 3.5.1
 * jupyterlab 4
 * Matlab R2023b
 * Mathematica 13.3.1
@@ -107,7 +107,7 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 * conda bfsu：https://mirrors.bfsu.edu.cn/help/anaconda/
 * pip bfsu：https://mirrors.bfsu.edu.cn/help/pypi/
 * apt ustc：https://mirrors.ustc.edu.cn/help/debian.html
-* apache tuna: https://mirrors.tuna.tsinghua.edu.cn/apache/
+* apache tuna: https://mirrors.ustc.edu.cn/apache/
 * julia-pkg ustc: https://mirrors.ustc.edu.cn/julia/
 
 ### Upstream of the project
