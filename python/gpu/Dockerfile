@@ -33,7 +33,7 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debi
 USER ${NB_UID}
 
 # install jupyter python mamba extension
-RUN pip install 'jupyterlab' && \
+RUN pip install 'jupyterlab' 'jupyterhub' && \
     pip install jupyterlab-language-pack-zh-CN jupyterlab_tabnine && \
     pip cache purge 
 
