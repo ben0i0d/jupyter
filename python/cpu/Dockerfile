@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # Copy files
 COPY cert/cert.pem /usr/local/share/ca-certificates/eoelab.org.crt
-COPY conf/pip.conf /etc/
+COPY conf/pip.conf conf/profile /etc/
 COPY start-sh/* /usr/local/bin/
 COPY conf/jupyter_server_config.py /etc/jupyter/
 

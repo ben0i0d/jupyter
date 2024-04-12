@@ -1,7 +1,5 @@
 FROM ben0i0d/jupyter:py-c
 
- 
-
 USER root
 
 ENV PATH="${PATH}:/opt/maple/bin" 

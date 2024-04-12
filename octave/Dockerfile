@@ -1,7 +1,5 @@
 FROM ben0i0d/jupyter:py-c
 
- 
-
 USER root
 # Install Octave + doc + package + graph_toolkit
 RUN apt-get update --yes && \

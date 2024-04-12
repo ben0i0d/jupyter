@@ -1,7 +1,5 @@
 FROM ben0i0d/cuda:12.2.0-devel-debian13
 
-EXPOSE 8888
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
@@ -16,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # Copy files
 COPY cert/cert.pem /usr/local/share/ca-certificates/eoelab.org.crt
-COPY conf/pip.conf /etc/
+COPY conf/pip.conf conf/profile /etc/
 COPY start-sh/* /usr/local/bin/
 COPY conf/jupyter_server_config.py /etc/jupyter/
 
