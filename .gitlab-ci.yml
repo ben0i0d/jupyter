@@ -421,7 +421,7 @@ py-c-build:
 #       --snapshot-mode=redo
 #       --destination "ben0i0d/jupyter:matlab-c-mcm"
 
-# up-g-build:
+# py-g-build:
 #   stage: build
 #   needs: []
 #   script:
@@ -431,10 +431,10 @@ py-c-build:
 #       --dockerfile "Dockerfile"
 #       --cache=false
 #       --snapshot-mode=redo
-#       --destination "ben0i0d/jupyter:up-g"
+#       --destination "ben0i0d/jupyter:py-g"
 # py-g-build:
 #   stage: build
-#   needs: [up-g-build] # 
+#   needs: [py-g-build] # 
 #   script:
 #     - cd py/gpu
 #     - /kaniko/executor
