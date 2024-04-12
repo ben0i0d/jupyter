@@ -102,7 +102,7 @@ MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 **软件包版本**
 * cuda 12.2.0
 * Python 3.11
-* Julia 1.9.4
+* Julia latest
 * spark 3.5.0
 * jupyterlab 4
 * Matlab R2023b
