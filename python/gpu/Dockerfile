@@ -1,5 +1,7 @@
 FROM ben0i0d/cuda:12.2.0-devel-debian13
 
+EXPOSE 8888
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
@@ -19,7 +21,7 @@ COPY start-sh/* /usr/local/bin/
 COPY conf/jupyter_server_config.py /etc/jupyter/
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
-    apt-get update --yes && apt-get install --yes --no-install-recommends sudo tini git zip unzip fonts-wqy-zenhei python3-pip python3-venv && \
+    apt-get update --yes && apt-get install --yes --no-install-recommends sudo tini git zip unzip fonts-wqy-zenhei python3-venv && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     chmod a+rx /usr/local/bin/* && \
     useradd -l -m -s /bin/bash -N -u "${NB_UID}" "${NB_USER}" && \
