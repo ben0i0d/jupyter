@@ -94,10 +94,10 @@ PRA-->PRAA(pyai)
 PRA-->PRAB(pyspark)  
 PRA-->PRAC(pyflink)  
 Python-->MATH{MATH-TOOL}-->MA(Octave)
-MATH-->MB(Scilab)
+MATH-->MB(Maple)
 MATH-->MC(Sagemath)
-MATH-->ME(Mathematica)
 MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
+MATH-->ME(Mathematica)
 ```
 
 ## 上游
