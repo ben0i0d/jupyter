@@ -9,5 +9,5 @@ RUN apt-get update --yes && \
 USER ${NB_UID}
 
 # Install Octave kernel
-RUN mamba install --yes -c conda-forge octave_kernel && \
-    mamba clean --all -f -y 
+RUN pip install octave_kernel && \
+    pip cache purge 
