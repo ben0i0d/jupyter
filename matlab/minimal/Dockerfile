@@ -6,7 +6,7 @@ COPY conf/dep.txt /tmp/dep.txt
 COPY conf/mpm_input_r2023b.txt /opt/mpm_input_r2023b.txt
 
 # base deps,copy by mathworks-ref-arch/container-images
-RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/dep.txt` && \
+RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/dep.txt` wget && \
 # using Simulink code generation capabilities, compile mex files with gcc, g++, or gfortran.
     apt-get install -y gcc g++ gfortran \
 # mathworks/jupyter-matlab-proxy require X Virtual Frame Buffer (Xvfb)
@@ -24,8 +24,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y `cat /tmp/dep.t
     mpm install --inputfile /opt/mpm_input_r2023b.txt && \
     ln -s /opt/matlab/r2023b/bin/matlab /usr/local/bin/matlab && \
 # create license folder into the container. 
-    mkdir -p /opt/matlab/r2023b/licenses/ && mkdir -p /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/ && \
-# install matlab kernel
-    pip install jupyter-matlab-proxy 
+    mkdir -p /opt/matlab/r2023b/licenses/ && mkdir -p /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/ 
 
 USER ${NB_UID}
+# install matlab kernel
+RUN pip install jupyter-matlab-proxy && \
+    pip cache purge 

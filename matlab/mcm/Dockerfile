@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:matlab-c-minimal
+FROM ben0i0d/jupyter:matlab-minimal
 
 USER root
 
