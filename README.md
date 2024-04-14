@@ -58,7 +58,7 @@ Specify the image in the profile of the singleuser
         1. Each time the environment is started, run `WolframKernel` to manually activate. View activation code at `https://ibug.io/blog/2019/05/mathematica-keygen/`. If activation fails multiple times, run `rm /home/jovyan/.Mathematica/Licensing/mathpass` to delete previous license records.
 * MATLAB: A programming and numerical computing platform that supports data analysis, algorithm development, and modeling.
     * Description
-        1. Upload `license.lic libmwlmgrimpl.so` to the main directory. Each time the environment is started, run `cp license.lic /opt/matlab/r2023b/licenses/ && cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/` to activate before use.
+        1. Upload `license.lic libmwlmgrimpl.so` to the main directory. Each time the environment is started, run `sudo cp license.lic /opt/matlab/r2023b/licenses/ && sudo cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/` to activate before use.
     * minimal: Contains only `Product:MATLAB`
     * mcm: Contains toolboxes required for mathematical modeling.
 

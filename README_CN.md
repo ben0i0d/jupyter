@@ -67,7 +67,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
         1. 每一次启动环境时，运行`WolframKernel`完成手动激活，激活码查看`https://ibug.io/blog/2019/05/mathematica-keygen/`，如果多次激活不成功，请运行`rm /home/jovyan/.Mathematica/Licensing/mathpass`删除之前的许可记录
 * MATLAB：一种支持数据分析、算法开发和建模的编程和数值计算平台。
     * 说明
-        1. 将`license.lic libmwlmgrimpl.so`上传至主目录，每一次启动环境时，运行`cp license.lic /opt/matlab/r2023b/licenses/ && cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/`完成激活再使用
+        1. 将`license.lic libmwlmgrimpl.so`上传至主目录，每一次启动环境时，运行`sudo cp license.lic /opt/matlab/r2023b/licenses/ && sudo cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/`完成激活再使用
     * minimal:仅仅包含`Product:MATLAB`
     * mcm:包含数学建模所需要的工具箱
 
