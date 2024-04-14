@@ -2,9 +2,6 @@
 
 ## Jupyter For Data-Science
 
-## IF YOU LOOK AT ME, don't use the code now, we are still working on it
-## THE DOCKER IMAGE IS READY ，LOOK AT THE URL
-
 English | [中文](README_CN.md)
 
 **THIS doc for non-CN USER**
