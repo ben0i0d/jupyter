@@ -4,12 +4,10 @@ USER root
 
 ENV PATH="${PATH}:/opt/maple/bin" 
 
-COPY kernel/* /opt/conda/share/jupyter/kernels/maple/
+COPY --chown="${NB_UID}:${NB_GID}" kernel /opt/conda/share/jupyter/kernels/maple/
+COPY Maple2023.0LinuxX64Installer.run .
 
-RUN wget -q https://eoelab.org:1024/s/DDMg8r27Lr75sBo/download/Maple2023.0LinuxX64Installer.run && chmod +x Maple2023.0LinuxX64Installer.run && \
-    ./Maple2023.0LinuxX64Installer.run --mode unattended --installer-language en --installdir /opt/maple --desktopshortcut 0 && rm Maple2023.0LinuxX64Installer.run && \
-    fix-permissions /opt/maple && \
-    fix-permissions "/home/${NB_USER}" && \
-    fix-permissions "${CONDA_DIR}"
+RUN chmod +x Maple2023.0LinuxX64Installer.run && \
+    ./Maple2023.0LinuxX64Installer.run --mode unattended --installer-language en --installdir /opt/maple --desktopshortcut 0 && rm Maple2023.0LinuxX64Installer.run 
 
 USER ${NB_UID}
