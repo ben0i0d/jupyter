@@ -32,12 +32,6 @@ zh_font = FontProperties(fname="/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc")
 # 将中文字体设置为默认字体
 plt.rcParams["font.family"] = zh_font.get_name()
 ```
-4. 以下代码适用于增加对conda虚拟目录的支持，以实现自定义环境不丢失
-    1. 数据持久化
-        * docker启动时添加`-v "DATA-VOLUME":/opt/conda/envs/`
-        * Jupyterhub添加额外挂载点到`/opt/conda/envs/`
-    2. 虚拟环境安装内核  
-        * 使用`conda create -n NAME *** ipykernel` 创建这个虚拟环境。使用`source activate NAME`切换到这个虚拟环境，并且添加一个kernel到本地的`.jupyter`目录，使用`python -m ipykernel install --user --name NAME --display-name "DISPLAY-NAME"`完成
 ### 当前构建镜像清单
 * Upstream: 镜像上游，对标jupyter官方的minimal-notebook镜像
     * 说明

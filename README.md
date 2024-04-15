@@ -24,12 +24,6 @@ Specify the image in the profile of the singleuser
 ### Global description
 1. If you build or fork the image yourself, replace the base image in the Dockerfile with the image on DockerHub
 2. For commercial software such as Mathematica, MATLAB, etc., we only provide packaging, and the specific activation method and possible consequences are borne by the user
-3. The following code is applicable to add support for conda virtual directories so that custom environments are not lost
-    1. Data persistence
-        * docker add `-v "DATA-VOLUME":/opt/conda/envs/`
-        * Jupyterhub add mountpoint`/opt/conda/envs/`
-    2. Install the kernel in a virtual environment  
-        * Use `conda create -n NAME *** ipykernel` create this env,use`source activate NAME`switch，use`python -m ipykernel install --user --name NAME --display-name "DISPLAY-NAME"`done
 ### List of images that are currently being built
 * Upstream: Mirror upstream, benchmarking against the jupyter official minimal-notebook image
     * Description
