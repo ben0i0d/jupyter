@@ -58,10 +58,13 @@ plt.rcParams["font.family"] = zh_font.get_name()
         1. 将`license.dat libmaple.so`上传至主目录，每一次启动环境时，运行`cp license.dat /opt/maple/license && cp libmaple.so /opt/maple/bin.X86_64_LINUX/`完成激活再使用
 * Mathematica:一个科学计算软件，在数据分析、数学计算等领域提供了强大方便的使用功能。
     * 说明
-        1. 每一次启动环境时，运行`WolframKernel`完成手动激活，激活码查看`https://ibug.io/blog/2019/05/mathematica-keygen/`，如果多次激活不成功，请运行`rm /home/jovyan/.Mathematica/Licensing/mathpass`删除之前的许可记录
+        1. 每一次启动环境时，运行`WolframKernel`完成手动激活，激活码查看`https://mmaactivate.github.io/MMAActivate/`，如果多次激活不成功，请运行`rm /home/jovyan/.Mathematica/Licensing/mathpass`删除之前的许可记录
+        2. 如果你有账户，使用WEB验证/在线验证
+        3. 该镜像存在问题, kernel 卡在 connecting.
 * MATLAB：一种支持数据分析、算法开发和建模的编程和数值计算平台。
     * 说明
         1. 将`license.lic libmwlmgrimpl.so`上传至主目录，每一次启动环境时，运行`sudo cp license.lic /opt/matlab/r2023b/licenses/ && sudo cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/`完成激活再使用
+        2. 如果你有账户，使用WEB验证/在线验证
     * minimal:仅仅包含`Product:MATLAB`
     * mcm:包含数学建模所需要的工具箱
 

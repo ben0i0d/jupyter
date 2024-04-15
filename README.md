@@ -49,10 +49,13 @@ Specify the image in the profile of the singleuser
         1. Upload `license.dat libmaple.so` to the main directory. Each time the environment is started, run `cp license.dat /opt/maple/license && cp libmaple.so /opt/maple/bin.X86_64_LINUX/` to activate before use.
 * Mathematica: A scientific computing software that provides powerful and convenient features for data analysis, mathematical computation, and other fields.
     * Description
-        1. Each time the environment is started, run `WolframKernel` to manually activate. View activation code at `https://ibug.io/blog/2019/05/mathematica-keygen/`. If activation fails multiple times, run `rm /home/jovyan/.Mathematica/Licensing/mathpass` to delete previous license records.
+        1. Each time the environment is started, run `WolframKernel` to manually activate. View activation code at `https://mmaactivate.github.io/MMAActivate/`. If activation fails multiple times, run `rm /home/jovyan/.Mathematica/Licensing/mathpass` to delete previous license records.
+        2. If you have an account, use web verification/online verification.
+        3. THIS IS NOT READY NOW , kernel is stuck connecting.
 * MATLAB: A programming and numerical computing platform that supports data analysis, algorithm development, and modeling.
     * Description
         1. Upload `license.lic libmwlmgrimpl.so` to the main directory. Each time the environment is started, run `sudo cp license.lic /opt/matlab/r2023b/licenses/ && sudo cp libmwlmgrimpl.so /opt/matlab/r2023b/bin/glnxa64/matlab_startup_plugins/lmgrimpl/` to activate before use.
+        2. If you have an account, use web verification/online verification.
     * minimal: Contains only `Product:MATLAB`
     * mcm: Contains toolboxes required for mathematical modeling.
 
@@ -92,7 +95,7 @@ MATH-->ME(Mathematica)
 * spark 3.5.1
 * jupyterlab 4
 * Matlab R2023b
-* Mathematica 13.3.1
+* Mathematica 14.0
 * Maple 2023
 
 **Mirror source**
