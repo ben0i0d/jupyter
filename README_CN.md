@@ -51,8 +51,6 @@ plt.rcParams["font.family"] = zh_font.get_name()
         1. Julia镜像中的环境变量`JULIA_NUM_THREADS`，请在启动时根据理想的并发线程数进行配置
 * Sagemath：一个开源的数学计算系统，结合了多个数学软件包，提供了广泛的数学功能，如数值计算、符号计算、离散数学和统计分析。它也是一个交互式计算环境，方便进行数学建模、算法设计和学术研究。
 * Scilab（With Desktop-GUI）: 开源的数值计算软件，适用于科学和工程领域中的数值分析、数据可视化、模拟和建模。它提供了丰富的数学函数和工具箱，支持矩阵计算、符号计算和绘图功能，是一个强大的数学工具，尤其适用于教育和研究领域，提供Xfce桌面支持，包含APT可获取的全部插件。
-    * Description
-        1. 该镜像存在问题
 * Octave: 开源的数值计算软件，类似于Matlab，用于科学计算、数据分析和数值模拟。它提供了强大的矩阵运算、绘图功能以及丰富的数值分析函数，是一个免费且便捷的工具，适合进行数学建模、算法开发和教学任务，包含APT可获取的全部插件。
 * Maple: 一个数学软件，透过智能文件界面提供强大数学引擎，可以轻松分析、探索、可视化和求解数学问题
     * 说明
@@ -93,6 +91,7 @@ MATH-->MB(Maple)
 MATH-->MC(Sagemath)
 MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 MATH-->ME(Mathematica)
+MATH-->MF(Scilab)
 ```
 
 ## 上游
@@ -102,6 +101,7 @@ MATH-->ME(Mathematica)
 * Python 3.11
 * Julia latest
 * spark 3.5.1
+* flink 1.19.0
 * jupyterlab 4
 * Matlab R2023b
 * Mathematica 13.3.1
@@ -125,6 +125,8 @@ jupyter团队项目 https://github.com/jupyter/docker-stacks
 * R: http://irkernel.github.io/
 * Octave: https://github.com/Calysto/octave_kernel
 * MATLAB: https://github.com/mathworks/jupyter-matlab-proxy
+* MMA: https://github.com/WolframResearch/WolframLanguageForJupyter
+
 ## 必要的版权说明
 对于派生自其他团队的代码，我们在文件头添加了原版版权声明，我们保留并且支持其他开发团队版权
 

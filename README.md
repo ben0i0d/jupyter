@@ -42,8 +42,6 @@ Specify the image in the profile of the singleuser
         1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
 * Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
 * Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
-    * Description
-        1. THIS IS NOT READY NOW .
 * Octave: An open-source numerical computing software similar to Matlab, used for scientific computing, data analysis, and numerical simulation. It provides powerful matrix operations, plotting functions, and rich numerical analysis functions, a free and convenient tool suitable for mathematical modeling, algorithm development, and teaching tasks, includes all plugins available through APT.
 * Maple: A mathematical software that provides a powerful mathematical engine through an intelligent file interface, enabling easy analysis, exploration, visualization, and solving of mathematical problems.
     * Description
@@ -85,6 +83,7 @@ MATH-->MB(Maple)
 MATH-->MC(Sagemath)
 MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
 MATH-->ME(Mathematica)
+MATH-->MF(Scilab)
 ```
 
 ## Upstream
@@ -94,6 +93,7 @@ MATH-->ME(Mathematica)
 * Python 3.11
 * Julia latest
 * spark 3.5.1
+* flink 1.19.0
 * jupyterlab 4
 * Matlab R2023b
 * Mathematica 14.0
@@ -117,6 +117,7 @@ https://github.com/jupyter/docker-stacks
 * R: http://irkernel.github.io/
 * Octave: https://github.com/Calysto/octave_kernel
 * MATLAB: https://github.com/mathworks/jupyter-matlab-proxy
+* MMA: https://github.com/WolframResearch/WolframLanguageForJupyter
 
 ## Necessary copyright notice
 For code derived from other teams, we added the original copyright notice to the file header, and we retain and support the copyrights of other development teams
