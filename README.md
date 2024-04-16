@@ -40,6 +40,7 @@ Specify the image in the profile of the singleuser
 * Julia: Supports Julia, a high-performance, dynamic programming language designed for scientific computing and data analysis, with readability similar to Python and execution speed similar to C.
     * Description:
         1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
+* R: Supports R, a programming language for statistical analysis and data visualization, with rich data processing libraries and powerful statistical functions, widely used in data science and research fields.
 * Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
 * Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
 * Octave: An open-source numerical computing software similar to Matlab, used for scientific computing, data analysis, and numerical simulation. It provides powerful matrix operations, plotting functions, and rich numerical analysis functions, a free and convenient tool suitable for mathematical modeling, algorithm development, and teaching tasks, includes all plugins available through APT.
@@ -71,6 +72,7 @@ Specify the image in the profile of the singleuser
 ```mermaid
 graph LR
 Python-->PROGRAM{PROGRAMLANG}
+PROGRAM-->PB(R)
 PROGRAM-->PC(Julia)
 PROGRAM-->PR(mojo)
 Python-->PRA(Scipy)
@@ -100,11 +102,11 @@ MATH-->MF(Scilab)
 * Maple 2023
 
 **Mirror source**
-* conda bfsu：https://mirrors.bfsu.edu.cn/help/anaconda/
 * pip bfsu：https://mirrors.bfsu.edu.cn/help/pypi/
 * apt ustc：https://mirrors.ustc.edu.cn/help/debian.html
-* apache tuna: https://mirrors.ustc.edu.cn/apache/
+* apache ustc: https://mirrors.ustc.edu.cn/apache/
 * julia-pkg ustc: https://mirrors.ustc.edu.cn/julia/
+* CRAN ustc：https://mirrors.ustc.edu.cn/CRAN/
 
 ### Upstream of the project
 https://github.com/jupyter/docker-stacks
@@ -121,4 +123,3 @@ https://github.com/jupyter/docker-stacks
 
 ## Necessary copyright notice
 For code derived from other teams, we added the original copyright notice to the file header, and we retain and support the copyrights of other development teams
-

@@ -13,9 +13,13 @@ COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/julias/ /opt/julias/
 ENV JULIA_PKG_SERVER=https://mirrors.ustc.edu.cn/julia \
     JULIA_NUM_THREADS=12
 
+USER root
+
+RUN ln -s "`find /opt/julias -name 'bin'`/julia" /usr/local/bin/julia 
+
+USER ${NB_UID}
 # Install IJulia as jovyan and then move the kernelspec out to the system share location. 
-RUN sudo ln -s "`find /opt/julias -name 'bin'`/julia" /usr/local/bin/julia && \
-    julia -e 'import Pkg; Pkg.update()' && \
+RUN julia -e 'import Pkg; Pkg.update()' && \
     julia -e 'using Pkg; pkg"add IJulia"; pkg"precompile"' && \
     mv "${HOME}/.local/share/jupyter/kernels/"* "/opt/base/share/jupyter/kernels/" && \
     rm -rf "${HOME}/.local" 
