@@ -19,7 +19,7 @@ ENV SPARK_OPTS="--driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M 
 
 # Configure IPython system-wide
 COPY ipython_kernel_config.py "/etc/ipython/"
-COPY --chown="root:root" --from=builder /usr/local/spark/ /usr/local/spark
+COPY --chown="root:root" --from=builder /usr/local/spark-3.5.1-bin-hadoop3/ /usr/local/spark-3.5.1-bin-hadoop3/
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends openjdk-17-jre-headless ca-certificates-java && apt-get clean && rm -rf /var/lib/apt/lists/* && \
