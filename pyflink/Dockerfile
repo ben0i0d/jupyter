@@ -1,30 +1,29 @@
-FROM ben0i0d/jupyter:scipy-c
+FROM ben0i0d/jupyter:py-c AS builder
 
- 
+USER root
+# You need to use https://archive.apache.org/dist/ website if you want to download old Spark versions
+# But it seems to be slower, that's why we use recommended site for download
+RUN apt-get update --yes && apt-get install --yes --no-install-recommends wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    wget -qO "flink.tgz" "https://mirrors.ustc.edu.cn/apache/flink/flink-1.19.0/flink-1.19.0-bin-scala_2.12.tgz" && \
+    tar xzf "flink.tgz" -C /usr/local --no-same-owner && rm "flink.tgz" 
 
-WORKDIR /tmp
-
-EXPOSE 8081
+FROM ben0i0d/jupyter:py-c
 
 USER root
 
 # Configure Spark
 ENV FLINK_HOME=/usr/local/flink \
-    PATH="${PATH}:/usr/local/flink/bin" \
-    FLINK_VERSION="1.18.0" 
+    PATH="${PATH}:/usr/local/flink/bin"
+
+COPY --from=builder --chown="${NB_UID}:${NB_GID}" /usr/local/flink-1.19.0/ /usr/local/flink-1.19.0/
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends "openjdk-17-jre-headless" ca-certificates-java && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    wget -qO "flink.tgz" "https://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-${FLINK_VERSION}/flink-${FLINK_VERSION}-bin-scala_2.12.tgz"; \
-    tar xzf "flink.tgz" -C /usr/local --owner root --group root --no-same-owner && \
-    rm "flink.tgz" 
+    apt-get install --yes --no-install-recommends openjdk-17-jre-headless ca-certificates-java && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    ln -s "flink-1.19.0" "/usr/local/flink" 
 
 USER ${NB_UID}
 
 # Install pyflink
-RUN mamba install --yes 'apache-beam' && mamba install --yes 'apache-flink' && \
-    mamba clean --all -f -y 
-
-WORKDIR "${HOME}"
-
+RUN pip install apache-flink && \
+    pip cache purge
