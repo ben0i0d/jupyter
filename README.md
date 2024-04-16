@@ -41,7 +41,6 @@ Specify the image in the profile of the singleuser
     * Description:
         1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
 * Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
-* Dotnet: A cross-platform development framework that supports C#, F#, and PW, used for building various types of applications including web applications, desktop applications, and mobile applications. It provides rich class libraries and tools, simplifying development processes, and has high performance and scalability.
 * Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
     * Description
         1. THIS IS NOT READY NOW .
@@ -78,9 +77,9 @@ PROGRAM-->PC(Julia)
 PROGRAM-->PR(mojo)
 Python-->PRA(Scipy)
 Python-->PRB(Scrpy)
-PRA-->PRAA(pyai)  
-PRA-->PRAB(pyspark)  
-PRA-->PRAC(pyflink)  
+PRA-->PRAA(pyai)
+PRA-->PRAB(pyspark)
+PRA-->PRAC(pyflink)
 Python-->MATH{MATH-TOOL}-->MA(Octave)
 MATH-->MB(Maple)
 MATH-->MC(Sagemath)
