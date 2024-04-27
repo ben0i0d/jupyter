@@ -55,7 +55,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
 * Octave: 开源的数值计算软件，类似于Matlab，用于科学计算、数据分析和数值模拟。它提供了强大的矩阵运算、绘图功能以及丰富的数值分析函数，是一个免费且便捷的工具，适合进行数学建模、算法开发和教学任务，包含APT可获取的全部插件。
 * Maple: 一个数学软件，透过智能文件界面提供强大数学引擎，可以轻松分析、探索、可视化和求解数学问题
     * 说明
-        1. 将`license.dat libmaple.so`上传至主目录，每一次启动环境时，运行`cp license.dat /opt/maple/license && cp libmaple.so /opt/maple/bin.X86_64_LINUX/`完成激活再使用
+        1. 将`license.dat libmaple.so`上传至主目录，每一次启动环境时，运行`sudo cp license.dat /opt/maple/license && sudo cp libmaple.so /opt/maple/bin.X86_64_LINUX/`完成激活再使用
 * Mathematica:一个科学计算软件，在数据分析、数学计算等领域提供了强大方便的使用功能。
     * 说明
         1. 每一次启动环境时，运行`WolframKernel`完成手动激活，激活码查看`https://mmaactivate.github.io/MMAActivate/`，如果多次激活不成功，请运行`rm /home/jovyan/.Mathematica/Licensing/mathpass`删除之前的许可记录

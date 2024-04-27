@@ -46,7 +46,7 @@ Specify the image in the profile of the singleuser
 * Octave: An open-source numerical computing software similar to Matlab, used for scientific computing, data analysis, and numerical simulation. It provides powerful matrix operations, plotting functions, and rich numerical analysis functions, a free and convenient tool suitable for mathematical modeling, algorithm development, and teaching tasks, includes all plugins available through APT.
 * Maple: A mathematical software that provides a powerful mathematical engine through an intelligent file interface, enabling easy analysis, exploration, visualization, and solving of mathematical problems.
     * Description
-        1. Upload `license.dat libmaple.so` to the main directory. Each time the environment is started, run `cp license.dat /opt/maple/license && cp libmaple.so /opt/maple/bin.X86_64_LINUX/` to activate before use.
+        1. Upload `license.dat libmaple.so` to the main directory. Each time the environment is started, run `sudo cp license.dat /opt/maple/license && sudo cp libmaple.so /opt/maple/bin.X86_64_LINUX/` to activate before use.
 * Mathematica: A scientific computing software that provides powerful and convenient features for data analysis, mathematical computation, and other fields.
     * Description
         1. Each time the environment is started, run `WolframKernel` to manually activate. View activation code at `https://mmaactivate.github.io/MMAActivate/`. If activation fails multiple times, run `rm /home/jovyan/.Mathematica/Licensing/mathpass` to delete previous license records.

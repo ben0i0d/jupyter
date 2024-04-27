@@ -1,5 +1,5 @@
 {
-  "display_name": "Maple 2023",
+  "display_name": "Maple 2024",
   "argv": [
     "/opt/maple/bin/maple",
     "-jupyter",
