@@ -35,7 +35,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
 ### 当前构建镜像清单
 * Upstream: 镜像上游，对标jupyter官方的minimal-notebook镜像
     * 说明
-        1. 上游已经切换到`debian:trixie`，GPU上游镜像也基于`debian:trixie`二次构建了镜像
+        1. 上游已经切换到`debian:bookworm-slim`，GPU上游镜像也基于`debian:bookworm`二次构建了镜像
         2. 默认情况下我们添加了eoelab.org的域名证书，这不会带来安全问题
         3. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
         4. 提供软件包：文件压缩/解压(.zip)，项目管理(git),中文字体（fonts-wqy-zenhei）

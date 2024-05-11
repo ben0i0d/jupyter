@@ -1,8 +1,6 @@
-FROM ben0i0d/cuda:12.2.0-devel-debian13
+FROM ben0i0d/cuda:12.2.0-devel-debian12
 
 EXPOSE 8888
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
 

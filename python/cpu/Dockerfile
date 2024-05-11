@@ -1,8 +1,6 @@
-FROM debian:trixie-slim
+FROM debian:bookworm-slim
 
 EXPOSE 8888
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
 

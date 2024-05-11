@@ -5,7 +5,7 @@ RUN pip install  \
     # Data analysis and visualization
     'pandas' 'matplotlib' \
     # Machine learning and data mining
-    'scikit-learn' 'jax' \
+    'scikit-learn' \
     # Scientific calculations and statistical analysis
     'scipy' 'numpy' &&\
     pip cache purge  && \

@@ -1,13 +1,13 @@
 FROM ben0i0d/jupyter:py-c
 
+ENV BASE_DIR=/opt/base
+
 USER root
 
-# Sage pre-requisites and jq for manipulating json
+# Sage install
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends sagemath sagemath-jupyter sagemath-doc && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}" && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends sagemath && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    sage -c 'from sage.repl.ipython_kernel.install import SageKernelSpec; SageKernelSpec.update(prefix=os.environ["BASE_DIR"])'
 
 USER $NB_UID
 
