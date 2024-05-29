@@ -10,7 +10,7 @@ FROM ben0i0d/jupyter:py-c
 
 COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/julias/ /opt/julias/
 
-ENV JULIA_PKG_SERVER=https://mirrors.ustc.edu.cn/julia \
+ENV JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia \
     JULIA_NUM_THREADS=12
 
 USER root
