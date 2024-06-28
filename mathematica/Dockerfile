@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:py-c AS builder
+FROM docker.io/ben0i0d/jupyter:py-c AS builder
 
 COPY Mathematica_14.0.0_LINUX.sh .
 
@@ -9,7 +9,7 @@ RUN apt-get update --yes && apt-get install --yes --no-install-recommends xz-uti
 
 RUN git clone --depth 1 https://github.com/WolframResearch/WolframLanguageForJupyter.git && mv WolframLanguageForJupyter /opt 
 
-FROM ben0i0d/jupyter:py-c
+FROM docker.io/ben0i0d/jupyter:py-c
 
 ENV PATH="${PATH}:/opt/Wolfram/Mathematica/14.0/Executables/" 
 

@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:py-g
+FROM docker.io/ben0i0d/jupyter:py-g
 
 # Install Python 3 packages
 RUN pip install \

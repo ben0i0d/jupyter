@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:py-c
+FROM docker.io/ben0i0d/jupyter:py-c
 
 ENV BASE_DIR=/opt/base
 

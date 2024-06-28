@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:novnc
+FROM docker.io/ben0i0d/jupyter:novnc
 
 # Combine ENV statements
 ENV LIBGL_ALWAYS_INDIRECT=1 \

@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:py-c AS builder
+FROM docker.io/ben0i0d/jupyter:py-c AS builder
 
 USER root
 
@@ -6,7 +6,7 @@ USER root
 RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     pip --no-cache-dir install jill && jill install --confirm 
 
-FROM ben0i0d/jupyter:py-c 
+FROM docker.io/ben0i0d/jupyter:py-c 
 
 COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/julias/ /opt/julias/
 

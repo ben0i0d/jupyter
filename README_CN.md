@@ -10,8 +10,8 @@ English | [中文](README_CN.md)
 
 ### 如何使用
 **Docker**
-* 没有数据持久化地使用：`docker run -d -p 8888:8888 ben0i0d/jupyter:<tag>`  
-* 提供数据持久化地使用：`docker run -d -p 8888:8888 -v "${PWD}":/home/jovyan ben0i0d/jupyter:<tag>`
+* 没有数据持久化地使用：`docker run -d -p 8888:8888 docker.io/ben0i0d/jupyter:<tag>`  
+* 提供数据持久化地使用：`docker run -d -p 8888:8888 -v "${PWD}":/home/jovyan docker.io/ben0i0d/jupyter:<tag>`
 
 **Jupyterhub**  
 在singleuser内的profile指定镜像
@@ -19,7 +19,7 @@ English | [中文](README_CN.md)
 - description: 提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
     display_name: Scipy
     kubespawner_override:
-        image: ben0i0d/jupyter:scipy-c
+        image: docker.io/ben0i0d/jupyter:scipy-c
 ```
 ### 全局说明
 1. 如果自行构建或派生，替换dockerfile中的基础镜像为dockerhub上的镜像

@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:py-c AS builder
+FROM docker.io/ben0i0d/jupyter:py-c AS builder
 
 USER root
 # You need to use https://archive.apache.org/dist/ website if you want to download old Spark versions
@@ -8,7 +8,7 @@ RUN apt-get update --yes && apt-get install --yes --no-install-recommends wget &
     wget -qO "flink.tgz" "https://mirrors.ustc.edu.cn/apache/flink/flink-1.19.0/flink-1.19.0-bin-scala_2.12.tgz" && \
     tar xzf "flink.tgz" -C /usr/local --no-same-owner && rm "flink.tgz" 
 
-FROM ben0i0d/jupyter:py-c
+FROM docker.io/ben0i0d/jupyter:py-c
 
 USER root
 

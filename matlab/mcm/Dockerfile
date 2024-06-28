@@ -1,4 +1,4 @@
-FROM ben0i0d/jupyter:matlab-minimal
+FROM docker.io/ben0i0d/jupyter:matlab-minimal
 
 USER root
 
