@@ -1,0 +1,116 @@
+name: Build
+
+on: [push]
+
+jobs:
+  Build:
+    runs-on: runner
+    steps:
+      - name: switch mirror
+        run: sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+      - name: setup node & git & CA
+        run: apk update && apk add nodejs git ca-certificates docker
+
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: python/cpu
+          tags: eoelab.org:1027/ben0i0d/jupyter:py-c
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: scrpy
+          tags: eoelab.org:1027/ben0i0d/jupyter:scrpy
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: scipy/cpu
+          tags: eoelab.org:1027/ben0i0d/jupyter:scipy-c
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: pyai/cpu
+          tags: eoelab.org:1027/ben0i0d/jupyter:pyai-c
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: pyspark
+          tags: eoelab.org:1027/ben0i0d/jupyter:pyspark
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: pyflink
+          tags: eoelab.org:1027/ben0i0d/jupyter:pyflink
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: julia
+          tags: eoelab.org:1027/ben0i0d/jupyter:julia
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: r
+          tags: eoelab.org:1027/ben0i0d/jupyter:r
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: novnc
+          tags: eoelab.org:1027/ben0i0d/jupyter:novnc
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: pyqt6
+          tags: eoelab.org:1027/ben0i0d/jupyter:pyqt6
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: octave
+          tags: eoelab.org:1027/ben0i0d/jupyter:octave
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: sagemath
+          tags: eoelab.org:1027/ben0i0d/jupyter:sage
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: scilab
+          tags: eoelab.org:1027/ben0i0d/jupyter:scilab
+
+

@@ -13,13 +13,20 @@ English | [中文](README_CN.md)
 * No data is used persistently：`docker run -d -p 8888:8888 docker.io/ben0i0d/jupyter:<tag>`  
 * Provide data for persistent use：`docker run -d -p 8888:8888 -v "${PWD}":/home/jovyan docker.io/ben0i0d/jupyter:<tag>`
 
-**Jupyterhub**  
+**Jupyterhub on K8S**  
 Specify the image in the profile of the singleuser
 ```
 - description:  SCIPython, for scientific research and engineering applications.
     display_name: Scipy
     kubespawner_override:
         image: docker.io/ben0i0d/jupyter:scipy-c
+```
+
+**Jupyterhub on Docker**
+```
+c.DockerSpawner.allowed_images = {
+        'Python': 'ben0i0d/jupyter:py-c'
+}
 ```
 ### Global description
 1. If you build or fork the image yourself, replace the base image in the Dockerfile with the image on DockerHub
@@ -28,9 +35,8 @@ Specify the image in the profile of the singleuser
 * Upstream: Mirror upstream, benchmarking against the jupyter official minimal-notebook image
     * Description
         1. Upstream has switched to `debian:bookworm-slim`, and GPU upstream images are also built based on `debian:bookworm`
-        2. By default, we add the domain certificate of eoelab.org, which does not pose any security issues
-        3. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
-        4. Provided packages: file compression/extraction (.zip), project management (git), Chinese fonts (fonts-wqy-zenhei)
+        2. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
+        3. Provided packages: file compression/extraction (.zip), project management (git), Chinese fonts (fonts-wqy-zenhei)
 * Python: Supports Python , combining Python syntax with the ecosystem for production and research.
     * Scipy: Provides a scientific computing environment for Python, offering rich numerical computation, optimization, signal processing, statistical analysis, etc., for scientific research and engineering applications.
     * Scrpy: Provides a web scraping environment for Python, used for extracting data from the internet, automating information gathering and analysis tasks, suitable for data mining, web scraping, and business intelligence collection applications.
@@ -74,7 +80,6 @@ graph LR
 Python-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PB(R)
 PROGRAM-->PC(Julia)
-PROGRAM-->PR(mojo)
 Python-->PRA(Scipy)
 Python-->PRB(Scrpy)
 PRA-->PRAA(pyai)

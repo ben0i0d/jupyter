@@ -13,13 +13,20 @@ English | [中文](README_CN.md)
 * 没有数据持久化地使用：`docker run -d -p 8888:8888 docker.io/ben0i0d/jupyter:<tag>`  
 * 提供数据持久化地使用：`docker run -d -p 8888:8888 -v "${PWD}":/home/jovyan docker.io/ben0i0d/jupyter:<tag>`
 
-**Jupyterhub**  
+**Jupyterhub on K8S**  
 在singleuser内的profile指定镜像
 ```
 - description: 提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
     display_name: Scipy
     kubespawner_override:
         image: docker.io/ben0i0d/jupyter:scipy-c
+```
+
+**Jupyterhub on Docker**
+```
+c.DockerSpawner.allowed_images = {
+        'Python': 'ben0i0d/jupyter:py-c'
+}
 ```
 ### 全局说明
 1. 如果自行构建或派生，替换dockerfile中的基础镜像为dockerhub上的镜像
@@ -36,9 +43,8 @@ plt.rcParams["font.family"] = zh_font.get_name()
 * Upstream: 镜像上游，对标jupyter官方的minimal-notebook镜像
     * 说明
         1. 上游已经切换到`debian:bookworm-slim`，GPU上游镜像也基于`debian:bookworm`二次构建了镜像
-        2. 默认情况下我们添加了eoelab.org的域名证书，这不会带来安全问题
-        3. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
-        4. 提供软件包：文件压缩/解压(.zip)，项目管理(git),中文字体（fonts-wqy-zenhei）
+        2. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
+        3. 提供软件包：文件压缩/解压(.zip)，项目管理(git),中文字体（fonts-wqy-zenhei）
 * Llinux（With Desktop-GUI）：在无特权的情况下学习Linux系统，提供Xfce桌面支持   
 * Python：支持Python，通过将python语法与生态系统相结合进行生产与研究。
     * Scipy：提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。
@@ -82,7 +88,6 @@ graph LR
 Python-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PB(R)
 PROGRAM-->PC(Julia)
-PROGRAM-->PR(mojo)
 Python-->PRA(Scipy)
 Python-->PRB(Scrpy)
 PRA-->PRAA(pyai)

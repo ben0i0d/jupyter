@@ -1,12 +1,12 @@
-FROM docker.io/ben0i0d/jupyter:py-c
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c
 
 # Install Python 3 packages
 RUN pip install  \
     # Data analysis and visualization
-    'pandas' 'matplotlib' \
+    'matplotlib' \
     # Machine learning and data mining
-    'scikit-learn' \
+    'duckdb' \
     # Scientific calculations and statistical analysis
-    'scipy' 'numpy' &&\
+    'numpy' &&\
     pip cache purge  && \
     MPLBACKEND=Agg python -c "import matplotlib.pyplot" 

@@ -1,4 +1,4 @@
-FROM docker.io/ben0i0d/jupyter:py-c AS builder
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
 
 USER root
 
@@ -6,12 +6,12 @@ USER root
 RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     pip --no-cache-dir install jill && jill install --confirm 
 
-FROM docker.io/ben0i0d/jupyter:py-c 
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c 
 
 COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/julias/ /opt/julias/
 
 ENV JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia \
-    JULIA_NUM_THREADS=12
+    JULIA_NUM_THREADS=8
 
 USER root
 

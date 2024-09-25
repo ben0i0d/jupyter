@@ -13,8 +13,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     HOME="/home/jovyan"
 
 # Copy files
-COPY cert/cert.pem /usr/local/share/ca-certificates/eoelab.org.crt
-COPY conf/pip.conf conf/profile /etc/
+COPY conf/profile /etc/
 COPY start-sh/* /usr/local/bin/
 COPY conf/jupyter_server_config.py /etc/jupyter/
 
@@ -26,7 +25,8 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debi
     usermod -aG sudo "${NB_USER}" && echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers  && \
     mkdir -p "/opt/base/" && python3 -m venv /opt/base && chown -hR "${NB_USER}:${NB_GID}" "/opt/base" && \
     chmod g+w /etc/passwd && \
-    mkdir /usr/local/bin/start-notebook.d && mkdir /usr/local/bin/before-notebook.d 
+    mkdir /usr/local/bin/start-notebook.d && mkdir /usr/local/bin/before-notebook.d && \
+    echo '[global]\nindex-url = https://mirrors.bfsu.edu.cn/pypi/web/simple' >  /etc/pip.conf
 
 USER ${NB_UID}
 
