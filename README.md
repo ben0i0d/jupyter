@@ -80,11 +80,10 @@ graph LR
 Python-->PROGRAM{PROGRAMLANG}
 PROGRAM-->PB(R)
 PROGRAM-->PC(Julia)
-Python-->PRA(Scipy)
+Python-->PRA(Scipy)-->PRAA(pyai)
 Python-->PRB(Scrpy)
-PRA-->PRAA(pyai)
-PRA-->PRAB(pyspark)
-PRA-->PRAC(pyflink)
+Python-->PRC(pyspark)
+Python-->PRD(pyflink)
 Python-->MATH{MATH-TOOL}-->MA(Octave)
 MATH-->MB(Maple)
 MATH-->MC(Sagemath)
@@ -99,8 +98,8 @@ MATH-->MF(Scilab)
 * cuda 12.2.0
 * Python 3.11
 * Julia latest
-* spark 3.5.1
-* flink 1.19.0
+* spark 3.5.4
+* flink 1.20.0
 * jupyterlab 4
 * Matlab R2023b
 * Mathematica 14.0

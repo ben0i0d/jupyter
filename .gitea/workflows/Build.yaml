@@ -3,7 +3,7 @@ name: Build
 on: [push]
 
 jobs:
-  Build:
+  Base_Build:
     runs-on: runner
     steps:
       - name: switch mirror
@@ -29,12 +29,19 @@ jobs:
           context: python/cpu
           tags: eoelab.org:1027/ben0i0d/jupyter:py-c
 
-      - name: build & push image
-        uses: https://eoelab.org:1027/actions/build-push-action@v6
+  AI_C_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
         with:
-          push: true
-          context: scrpy
-          tags: eoelab.org:1027/ben0i0d/jupyter:scrpy
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
 
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
@@ -50,6 +57,27 @@ jobs:
           context: pyai/cpu
           tags: eoelab.org:1027/ben0i0d/jupyter:pyai-c
 
+  BigData_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
+
+      - name: build & push image
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: scrpy
+          tags: eoelab.org:1027/ben0i0d/jupyter:scrpy
+
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
@@ -63,6 +91,20 @@ jobs:
           push: true
           context: pyflink
           tags: eoelab.org:1027/ben0i0d/jupyter:pyflink
+
+  HPC_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
 
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
@@ -78,6 +120,20 @@ jobs:
           context: r
           tags: eoelab.org:1027/ben0i0d/jupyter:r
 
+  VNC_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
+
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
@@ -92,6 +148,20 @@ jobs:
           context: pyqt6
           tags: eoelab.org:1027/ben0i0d/jupyter:pyqt6
 
+  Octave_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
+
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
@@ -99,12 +169,40 @@ jobs:
           context: octave
           tags: eoelab.org:1027/ben0i0d/jupyter:octave
 
+  Sagemath_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
+
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
           push: true
           context: sagemath
           tags: eoelab.org:1027/ben0i0d/jupyter:sage
+
+  Scilab_Build:
+    runs-on: runner
+    needs: Base_Build
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
 
       - name: build & push image
         uses: https://eoelab.org:1027/actions/build-push-action@v6
