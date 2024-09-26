@@ -6,12 +6,6 @@ jobs:
   Build:
     runs-on: runner
     steps:
-      - name: switch mirror
-        run: sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-
-      - name: setup node & git & CA
-        run: apk update && apk add nodejs git ca-certificates docker
-
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
 
@@ -113,19 +107,19 @@ jobs:
           context: scilab
           tags: eoelab.org:1027/ben0i0d/jupyter:scilab
 
-      # - name: maple build
-      #   uses: https://eoelab.org:1027/actions/build-push-action@v6
-      #   with:
-      #     push: true
-      #     context: maple
-      #     tags: eoelab.org:1027/ben0i0d/jupyter:maple
+      - name: maple build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: maple
+          tags: eoelab.org:1027/ben0i0d/jupyter:maple
 
-      # - name: mma build
-      #   uses: https://eoelab.org:1027/actions/build-push-action@v6
-      #   with:
-      #     push: true
-      #     context: mathematica
-      #     tags: eoelab.org:1027/ben0i0d/jupyter:mma
+      - name: mma build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          push: true
+          context: mathematica
+          tags: eoelab.org:1027/ben0i0d/jupyter:mma
 
       - name: matlab build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
@@ -259,17 +253,17 @@ jobs:
       #     context: mathematica
       #     tags: ben0i0d/jupyter:mma
 
-      - name: matlab push
-        uses: https://eoelab.org:1027/actions/build-push-action@v6
-        with:
-          push: true
-          context: matlab/minimal
-          tags: ben0i0d/jupyter:matlab-minimal
+      # - name: matlab push
+      #   uses: https://eoelab.org:1027/actions/build-push-action@v6
+      #   with:
+      #     push: true
+      #     context: matlab/minimal
+      #     tags: ben0i0d/jupyter:matlab-minimal
 
-      - name: matlab-mcm push
-        uses: https://eoelab.org:1027/actions/build-push-action@v6
-        with:
-          push: true
-          context: matlab/mcm
-          tags: ben0i0d/jupyter:matlab-mcm
+      # - name: matlab-mcm push
+      #   uses: https://eoelab.org:1027/actions/build-push-action@v6
+      #   with:
+      #     push: true
+      #     context: matlab/mcm
+      #     tags: ben0i0d/jupyter:matlab-mcm
 
