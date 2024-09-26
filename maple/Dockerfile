@@ -1,11 +1,13 @@
-FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
+# FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
 
-COPY Maple2024.0LinuxX64Installer.run .
+# COPY Maple2024.0LinuxX64Installer.run .
 
-USER root
-# Two RUN layer to use cache
-RUN chmod +x Maple2024.0LinuxX64Installer.run && \
-    ./Maple2024.0LinuxX64Installer.run --mode unattended --installer-language en --installdir /opt/maple --desktopshortcut 0 && rm Maple2024.0LinuxX64Installer.run
+# USER root
+# # Two RUN layer to use cache
+# RUN chmod +x Maple2024.0LinuxX64Installer.run && \
+#     ./Maple2024.0LinuxX64Installer.run --mode unattended --installer-language en --installdir /opt/maple --desktopshortcut 0 && rm Maple2024.0LinuxX64Installer.run
+
+FROM eoelab.org:1027/ben0i0d/jupyter:maple AS builder
 
 FROM eoelab.org:1027/ben0i0d/jupyter:py-c
 
