@@ -1,0 +1,286 @@
+name: Flow
+
+on: [push]
+
+jobs:
+  Base:
+    runs-on: runner
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: py-c build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: python/cpu
+          tags: eoelab.org:1027/${{ gitea.repository }}:py-c
+
+  SCIPY_C:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: scipy-c build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: ScienceCompute/scipy/cpu
+          tags: eoelab.org:1027/${{ gitea.repository }}:scipy-c
+
+  PYAI_C:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: pyai-c build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: ScienceCompute/pyai/cpu
+          tags: eoelab.org:1027/${{ gitea.repository }}:pyai-c
+
+  SCRPY_C:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: scrpy-c build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: BigData/scrpy
+          tags: eoelab.org:1027/${{ gitea.repository }}:scrpy
+
+  SQL:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: scrpy-c build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: BigData/sql
+          tags: eoelab.org:1027/${{ gitea.repository }}:sql
+
+  PYSPARK:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: pyspark build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: BigData/pyspark
+          tags: eoelab.org:1027/${{ gitea.repository }}:pyspark
+
+  PYFLINK:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: pyflink build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: BigData/pyflink
+          tags: eoelab.org:1027/${{ gitea.repository }}:pyflink
+
+  AGDA:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+  ANSIBLE:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: ansible build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/ansible
+          tags: eoelab.org:1027/${{ gitea.repository }}:ansible
+
+  C:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: c build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/c
+          tags: eoelab.org:1027/${{ gitea.repository }}:c
+
+  CADABRA:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+  CHAPEL:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+  CPP:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+
+  JULIA:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: julia build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/julia
+          tags: eoelab.org:1027/${{ gitea.repository }}:julia
+
+  R:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: r build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/r
+          tags: eoelab.org:1027/${{ gitea.repository }}:r
+
+  NOVNC:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: novnc build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Gui/novnc
+          tags: eoelab.org:1027/${{ gitea.repository }}:novnc
+
+  PYQT6:
+    runs-on: runner
+    needs: NOVNC
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: pyqt6 build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Gui/pyqt6
+          tags: eoelab.org:1027/${{ gitea.repository }}:pyqt6
+
+  OCTAVE:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: octave build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/octave
+          tags: eoelab.org:1027/${{ gitea.repository }}:octave
+
+  SAGEMATH:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: sagemath build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/sagemath
+          tags: eoelab.org:1027/${{ gitea.repository }}:sage
+
+  SCILAB:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: scilab build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/scilab
+          tags: eoelab.org:1027/${{ gitea.repository }}:scilab
+
+  MAPLE:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: maple build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/maple
+          tags: eoelab.org:1027/${{ gitea.repository }}:maple
+
+  MMA:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: mma build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/mathematica
+          tags: eoelab.org:1027/${{ gitea.repository }}:mma
+
+  MATLAB_MINIMAL:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: matlab build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/matlab/minimal
+          tags: eoelab.org:1027/${{ gitea.repository }}:matlab-minimal
+
+  MATLAB_MCM:
+    runs-on: runner
+    needs: MATLAB_MINIMAL
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: matlab-mcm build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Math/matlab/mcm
+          tags: eoelab.org:1027/${{ gitea.repository }}:matlab-mcm
+
+
+  Push:
+    runs-on: runner
+    needs: [ANSIBLE] #MATLAB_MCM, MAPLE, MMA
+    steps:
+      - name: login gitea_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: eoelab.org:1027
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWD }}
+      - name: push images to gitea_registry
+        run: docker image push "eoelab.org:1027/${{ gitea.repository }}" --all-tags
+

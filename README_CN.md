@@ -1,6 +1,6 @@
 # jupyter-image-stacks
 
-## Jupyter 项目为了数据科学 
+## 通用的Jupyterlab镜像组 
 
 English | [中文](README_CN.md)
 
@@ -85,19 +85,27 @@ plt.rcParams["font.family"] = zh_font.get_name()
 ### 镜像依赖关系
 ```mermaid
 graph LR
-Python-->PROGRAM{PROGRAMLANG}
-PROGRAM-->PB(R)
-PROGRAM-->PC(Julia)
-Python-->PRA(Scipy)-->PRAA(pyai)
-Python-->PRB(Scrpy)
-Python-->PRC(pyspark)
-Python-->PRD(pyflink)
-Python-->MATH{MATH-TOOL}-->MA(Octave)
-MATH-->MB(Maple)
-MATH-->MC(Sagemath)
-MATH-->MD(MATLAB)-->MDA(minimal)-->MDAA(mcm)
-MATH-->ME(Mathematica)
-MATH-->MF(Scilab)
+Python-->P{PROGRAMLANG}
+P-->PA(R)
+P-->PB(Julia)
+P-->PC(C)
+P-->PD(Cpp)
+
+Python-->G{GUI}-->GA(Novnc)-->GAA(Pyqt6)
+
+Python-->S{Science-compute}-->SA(Scipy)
+S-->SB(Pyai)
+
+Python-->B{BigData}-->BA(pyspark)
+B-->BB(pyflink)
+B-->BC(Scrpy)
+
+Python-->M{MATH-TOOL}-->MA(Octave)
+M-->MB(Maple)
+M-->MC(Sagemath)
+M-->MD(MATLAB-minimal)-->MDA(Matlab-mcm)
+M-->ME(Mathematica)
+M-->MF(Scilab)
 ```
 
 ## 上游

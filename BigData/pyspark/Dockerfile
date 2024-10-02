@@ -30,7 +30,7 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-# Install pyarrow+findspark
+# Install pyarrow+findspark+duckdb
 RUN pip install 'pyspark' 'findspark' && \
     pip cache purge
 
