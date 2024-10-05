@@ -44,7 +44,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
     * 说明
         1. 上游已经切换到`debian:bookworm-slim`，GPU上游镜像也基于`debian:bookworm`二次构建了镜像
         2. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
-        3. 提供软件包：文件压缩/解压(.zip)，项目管理(git),中文字体（fonts-wqy-zenhei）
+        3. 提供软件包：.zip文件解压(.zip)
 * Llinux（With Desktop-GUI）：在无特权的情况下学习Linux系统，提供Xfce桌面支持   
 * Python：支持Python，通过将python语法与生态系统相结合进行生产与研究。
     * Scipy：提供Python的科学计算环境，提供了丰富的数值计算、优化、信号处理、统计分析等功能，用于科学研究和工程应用。

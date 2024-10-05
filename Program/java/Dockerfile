@@ -1,17 +1,23 @@
-FROM eoelab.org:1027/ben0i0d/jupyter:py-c
-
-
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
 
 USER root
-COPY ijava-1.3.0.zip ./ijava-kernel.zip
+
+WORKDIR /opt
+
+RUN apt-get update --yes && apt-get install --yes --no-install-recommends wget unzip && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    wget https://eoelab.org:1027/ben0i0d/sources/src/commit/e8631a5dce40bd0b134758f1aff4caca59c082fe/ijava-1.3.0.zip && \
+    unzip ijava-1.3.0.zip -d IJava && rm ijava-1.3.0.zip
+
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c
+
+COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/IJava/ /opt/IJava/
+
+USER root
+
 # Install dependencies
 RUN apt update && apt install --yes --no-install-recommends openjdk-17-jdk && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*  && \
-    # Unpack and install the kernel
-    unzip ijava-kernel.zip -d ijava-kernel  && \
-    cd ijava-kernel  && \
-    python3 install.py --sys-prefix && \
-    rm ../ijava-kernel.zip
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set user back to unpriviledged user.
-USER  $NB_USER
+# install the kernel
+USER $NB_USER
+RUN cd /opt/IJava  && python3 install.py --sys-prefix

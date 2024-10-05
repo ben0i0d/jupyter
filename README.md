@@ -36,7 +36,7 @@ c.DockerSpawner.allowed_images = {
     * Description
         1. Upstream has switched to `debian:bookworm-slim`, and GPU upstream images are also built based on `debian:bookworm`
         2. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
-        3. Provided packages: file compression/extraction (.zip), project management (git), Chinese fonts (fonts-wqy-zenhei)
+        3. Provided packages: .zip extraction
 * Python: Supports Python , combining Python syntax with the ecosystem for production and research.
     * Scipy: Provides a scientific computing environment for Python, offering rich numerical computation, optimization, signal processing, statistical analysis, etc., for scientific research and engineering applications.
     * Scrpy: Provides a web scraping environment for Python, used for extracting data from the internet, automating information gathering and analysis tasks, suitable for data mining, web scraping, and business intelligence collection applications.
