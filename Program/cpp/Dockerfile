@@ -1,13 +1,17 @@
 FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
 
-USER root
+ENV MAMBA_ROOT_PREFIX=/opt/mamba
 
-COPY .condarc /root/.condarc
+COPY .condarc /opt/mamba/.condarc
+
+USER root
 
 RUN apt-get update --yes && apt-get install --yes wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     wget https://eoelab.org:1027/ben0i0d/sources/raw/commit/ebbcba790d7b1804efde0715592a0665f6b81fbd/micromamba && \
-    chmod +x micromamba && ./micromamba install --yes --root-prefix /opt/mamba xeus-cling -c conda-forge
+    chmod +x micromamba && \
+    ./micromamba install --yes --root-prefix /opt/mamba xeus-cling -c conda-forge && \
+    ./micromamba clean --yes --all
 
 FROM eoelab.org:1027/ben0i0d/jupyter:py-c
 
