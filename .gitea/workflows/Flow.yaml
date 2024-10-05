@@ -154,12 +154,18 @@ jobs:
     steps:
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
-      - name: java build
+
+  JS:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: js build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: Program/java
-          tags: eoelab.org:1027/${{ gitea.repository }}:java
-
+          context: Program/js
+          tags: eoelab.org:1027/${{ gitea.repository }}:js
 
   JULIA:
     runs-on: runner
@@ -293,10 +299,9 @@ jobs:
           context: Math/matlab/mcm
           tags: eoelab.org:1027/${{ gitea.repository }}:matlab-mcm
 
-
   Push:
     runs-on: runner
-    needs: [JAVA] #MATLAB_MCM, MAPLE, MMA
+    needs: [CPP] #MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3
