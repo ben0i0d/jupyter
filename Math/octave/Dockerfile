@@ -8,6 +8,5 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-# Install Octave kernel
 RUN pip install octave_kernel && \
-    pip cache purge 
+    pip cache purge

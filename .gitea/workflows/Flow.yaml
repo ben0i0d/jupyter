@@ -14,17 +14,17 @@ jobs:
           context: python/cpu
           tags: eoelab.org:1027/${{ gitea.repository }}:py-c
 
-  SCIPY_C:
+  SCIPY:
     runs-on: runner
     needs: Base
     steps:
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
-      - name: scipy-c build
+      - name: scipy build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: ScienceCompute/scipy/cpu
-          tags: eoelab.org:1027/${{ gitea.repository }}:scipy-c
+          context: ScienceCompute/scipy
+          tags: eoelab.org:1027/${{ gitea.repository }}:scipy
 
   PYAI_C:
     runs-on: runner
@@ -179,6 +179,19 @@ jobs:
           context: Program/julia
           tags: eoelab.org:1027/${{ gitea.repository }}:julia
 
+  LUA:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: lua build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/lua
+          tags: eoelab.org:1027/${{ gitea.repository }}:lua
+
+
   R:
     runs-on: runner
     needs: Base
@@ -301,7 +314,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [CPP] #MATLAB_MCM, MAPLE, MMA
+    needs: [OCTAVE] #MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3

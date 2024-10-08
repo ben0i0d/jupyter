@@ -5,7 +5,7 @@ USER root
 # But it seems to be slower, that's why we use recommended site for download
 RUN apt-get update --yes && apt-get install --yes --no-install-recommends wget && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    wget -qO "spark.tgz" "https://mirrors.ustc.edu.cn/apache/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz" && \
+    wget -qO "spark.tgz" "https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz" && \
     tar xzf "spark.tgz" -C /usr/local --no-same-owner && rm "spark.tgz" 
 
 FROM eoelab.org:1027/ben0i0d/jupyter:py-c

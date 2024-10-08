@@ -4,7 +4,7 @@ USER root
 
 # install Julia packages in /opt/julias
 RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    pip --no-cache-dir install jill && jill install --confirm 
+    pip install jill && jill install --confirm 
     
 FROM eoelab.org:1027/ben0i0d/jupyter:py-c 
 

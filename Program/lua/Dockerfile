@@ -1,16 +1,29 @@
-FROM eoelab.org:1027/ben0i0d/jupyter:py-c
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
 
+ENV MAMBA_ROOT_PREFIX=/opt/mamba
 
+COPY .condarc /opt/mamba/.condarc
 
 USER root
 
-WORKDIR /opt
+RUN apt-get update --yes && apt-get install --yes wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    wget https://eoelab.org:1027/ben0i0d/sources/raw/commit/ebbcba790d7b1804efde0715592a0665f6b81fbd/micromamba && \
+    chmod +x micromamba && \
+    ./micromamba install --yes --root-prefix /opt/mamba xeus-lua -c conda-forge && \
+    ./micromamba clean --yes --all
 
-RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends lua5.4 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*  && \
-    pip install ilua
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c
+
+COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/mamba /opt/mamba
+
+ENV PATH="/opt/mamba/bin:${PATH}"
+
+USER root
+
+RUN apt-get update --yes && apt-get install --yes --no-install-recommends lua5.4 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*  
 
 USER ${NB_UID}
-WORKDIR "${HOME}"
 
+RUN jupyter kernelspec install /opt/mamba/share/jupyter/kernels/xlua --sys-prefix
