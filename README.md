@@ -7,6 +7,7 @@ English | [中文](README_CN.md)
 **THIS doc for non-CN USER**
 
 **dockerhub: https://hub.docker.com/r/ben0i0d/jupyter**
+**Our Gitea: https://eoelab.org:1027/ben0i0d/jupyter**
 
 ### HOW TO USE
 **Docker**
@@ -19,37 +20,33 @@ Specify the image in the profile of the singleuser
 - description:  SCIPython, for scientific research and engineering applications.
     display_name: Scipy
     kubespawner_override:
-        image: docker.io/ben0i0d/jupyter:scipy-c
+        image: docker.io/ben0i0d/jupyter:scipy
 ```
 
 **Jupyterhub on Docker**
 ```
 c.DockerSpawner.allowed_images = {
-        'Python': 'ben0i0d/jupyter:py-c'
+        'Scipy': 'ben0i0d/jupyter:scipy'
 }
 ```
 ### Global description
 1. If you build or fork the image yourself, replace the base image in the Dockerfile with the image on DockerHub
 2. For commercial software such as Mathematica, MATLAB, etc., we only provide packaging, and the specific activation method and possible consequences are borne by the user
 ### List of images that are currently being built
-* Upstream: Mirror upstream, benchmarking against the jupyter official minimal-notebook image
+* Base: benchmarking against the jupyter official minimal-notebook image
     * Description
         1. Upstream has switched to `debian:bookworm-slim`, and GPU upstream images are also built based on `debian:bookworm`
         2. Sudo is added for passwordless use. In scenarios with high security requirements, do not allow privilege escalation
         3. Provided packages: .zip extraction
-* Python: Supports Python , combining Python syntax with the ecosystem for production and research.
-    * Scipy: Provides a scientific computing environment for Python, offering rich numerical computation, optimization, signal processing, statistical analysis, etc., for scientific research and engineering applications.
-    * Scrpy: Provides a web scraping environment for Python, used for extracting data from the internet, automating information gathering and analysis tasks, suitable for data mining, web scraping, and business intelligence collection applications.
-    * pyspark: Provides a Python-based Spark programming interface for large-scale data processing and analysis, offering powerful parallel computing capabilities and rich data manipulation functions, suitable for efficient data processing and machine learning tasks in distributed environments.
-    * pyflink: Provides a Python-based Flink programming interface for stateful computation of unbounded and bounded data streams. It also offers batch processing APIs for processing batch data computations based on stream computing engines.
-    * pyai (With GPU): Provides a common AI toolchain, offering a rich set of deep learning frameworks and NLP model libraries, enabling developers to easily build and train various AI models for applications in image recognition, natural language processing, etc.
-* Julia: Supports Julia, a high-performance, dynamic programming language designed for scientific computing and data analysis, with readability similar to Python and execution speed similar to C.
+* Python: Supports Python
+    * Scipy: Provides a scientific computing environment for Python
+    * Scrpy: Provides a web scraping environment for Python
+    * pyspark: Provides a Python-based Spark program
+    * pyflink: Provides a Python-based Flink program
+    * pyai (With GPU): Provides Pytorch
+* Julia: Supports Julia
     * Description:
-        1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup.
-* R: Supports R, a programming language for statistical analysis and data visualization, with rich data processing libraries and powerful statistical functions, widely used in data science and research fields.
-* Sagemath: An open-source mathematical computation system that combines multiple mathematical packages, providing extensive mathematical functions such as numerical computation, symbolic computation, discrete mathematics, and statistical analysis. It is also an interactive computing environment, convenient for mathematical modeling, algorithm design, and academic research.
-* Scilab (With Desktop-GUI): An open-source numerical computing software, suitable for numerical analysis, data visualization, simulation, and modeling in scientific and engineering fields. It provides a rich set of mathematical functions and toolboxes, supports matrix computation, symbolic computation, and plotting functions, is a powerful mathematical tool, especially suitable for education and research fields, provides Xfce desktop support, and includes all plugins available through APT.
-* Octave: An open-source numerical computing software similar to Matlab, used for scientific computing, data analysis, and numerical simulation. It provides powerful matrix operations, plotting functions, and rich numerical analysis functions, a free and convenient tool suitable for mathematical modeling, algorithm development, and teaching tasks, includes all plugins available through APT.
+        1. Environment variable `JULIA_NUM_THREADS` in Julia image, please configure according to desired concurrency threads at startup, default is 8
 * Maple: A mathematical software that provides a powerful mathematical engine through an intelligent file interface, enabling easy analysis, exploration, visualization, and solving of mathematical problems.
     * Description
         1. Upload `license.dat libmaple.so` to the main directory. Each time the environment is started, run `sudo cp license.dat /opt/maple/license && sudo cp libmaple.so /opt/maple/bin.X86_64_LINUX/` to activate before use.
