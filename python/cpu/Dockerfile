@@ -13,8 +13,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PATH="/opt/base/bin:${PATH}" \
     HOME="/home/jovyan"
 
-# Copy files
+# start script
 COPY start-sh/* /usr/local/bin/
+# jupyter config(to disable hide files)
+COPY jupyter_server_config.py /etc/jupyter/
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
     # install base packages

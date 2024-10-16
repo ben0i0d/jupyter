@@ -148,6 +148,18 @@ jobs:
           context: Program/cpp
           tags: eoelab.org:1027/${{ gitea.repository }}:cpp
 
+  HASKELL:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: haskell build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/haskell
+          tags: eoelab.org:1027/${{ gitea.repository }}:haskell
+
   JAVA:
     runs-on: runner
     needs: Base
@@ -314,7 +326,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [MATLAB_MCM, MAPLE, MMA] #
+    needs: [HASKELL] # MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3
