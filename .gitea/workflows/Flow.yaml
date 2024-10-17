@@ -11,7 +11,8 @@ jobs:
       - name: py-c build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: python/cpu
+          context: python
+          build-args: BASE_IMAGE=debian:bookworm-slim
           tags: eoelab.org:1027/${{ gitea.repository }}:py-c
 
   SCIPY:
@@ -38,7 +39,7 @@ jobs:
           context: ScienceCompute/pyai/cpu
           tags: eoelab.org:1027/${{ gitea.repository }}:pyai-c
 
-  SCRPY_C:
+  SCRPY:
     runs-on: runner
     needs: Base
     steps:
@@ -135,6 +136,11 @@ jobs:
     steps:
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: chapel build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/chapel
+          tags: eoelab.org:1027/${{ gitea.repository }}:chapel
 
   CPP:
     runs-on: runner
@@ -326,7 +332,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [HASKELL] # MATLAB_MCM, MAPLE, MMA
+    needs: [CHAPEL] # MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3

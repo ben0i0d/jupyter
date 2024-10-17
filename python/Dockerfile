@@ -1,4 +1,6 @@
-FROM debian:bookworm-slim
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
 
 EXPOSE 8888
 
@@ -11,27 +13,39 @@ ENV DEBIAN_FRONTEND=noninteractive \
     NB_GID=100 \
     SHELL=/bin/bash \
     PATH="/opt/base/bin:${PATH}" \
-    HOME="/home/jovyan"
+    HOME="/home/jovyan" 
 
 # start script
 COPY start-sh/* /usr/local/bin/
-# jupyter config(to disable hide files)
-COPY jupyter_server_config.py /etc/jupyter/
+# jupyter config (to disable hide files) & healthcheck script
+COPY jupyter_server_config.py docker_healthcheck.py /etc/jupyter/
+# shell profile , to disable PATH be overwrited by jupyter
+COPY profile /etc/
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
     # install base packages
     apt-get update --yes && apt-get install --yes --no-install-recommends sudo tini unzip python3-venv && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     chmod a+rx /usr/local/bin/* && \
+    # disable super permision
+    echo "auth requisite pam_deny.so" >> /etc/pam.d/su && \
+    sed -i.bak -e 's/^%admin/#%admin/' /etc/sudoers && \
+    sed -i.bak -e 's/^%sudo/#%sudo/' /etc/sudoers && \
     # Create user , set password and add to sudoers
-    useradd -l -m -s /bin/bash -N -u "${NB_UID}" "${NB_USER}" && \
-    usermod -aG sudo "${NB_USER}" && echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers  && \
+    useradd --no-log-init --create-home --shell /bin/bash --uid "${NB_UID}" --no-user-group "${NB_USER}" && \
+    echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers  && \
     chmod g+w /etc/passwd && \
     # Create dirs for startup hooks
     mkdir /usr/local/bin/start-notebook.d && mkdir /usr/local/bin/before-notebook.d && \
     # setup base venv & pip_mirror
     mkdir -p "/opt/base/" && python3 -m venv /opt/base && chown -hR "${NB_USER}:${NB_GID}" "/opt/base" && \
     echo '[global]\nindex-url = https://mirrors.bfsu.edu.cn/pypi/web/simple' >  /etc/pip.conf
+
+# HEALTHCHECK documentation: https://docs.docker.com/engine/reference/builder/#healthcheck
+# This healtcheck works well for `lab`, `notebook`, `nbclassic`, `server`, and `retro` jupyter commands
+# https://github.com/jupyter/docker-stacks/issues/915#issuecomment-1068528799
+HEALTHCHECK --interval=3s --timeout=1s --start-period=3s --retries=3 \
+    CMD /etc/jupyter/docker_healthcheck.py || exit 1
 
 USER ${NB_UID}
 
@@ -43,5 +57,5 @@ RUN pip install 'jupyterlab' 'jupyterhub' && \
 WORKDIR "${HOME}"
 
 # Configure container startup
-ENTRYPOINT ["tini", "-g", "--"]
-CMD ["start-notebook.sh"]
+ENTRYPOINT ["tini", "-g", "--", "start.sh"]
+CMD ["start-notebook.py"]

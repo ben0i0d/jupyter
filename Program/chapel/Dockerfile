@@ -1,24 +1,24 @@
-FROM eoelab.org:1027/ben0i0d/jupyter:py-c
-
-
-
-WORKDIR /opt
-
-COPY chapel-1.31.0.tar.gz ./
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c AS builder
 
 USER root
 
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}" \
-    CHPL_LIB_PIC=shared 
+WORKDIR /opt
+
+RUN apt-get update --yes && apt-get install --yes --no-install-recommends wget && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    wget https://eoelab.org:1027/ben0i0d/sources/src/commit/a3cbcdd8551fa0bc27be0ae7e6d2d0aa5d997efe/chapel-2.2.0-1.debian12.amd64.deb
+
+
+FROM eoelab.org:1027/ben0i0d/jupyter:py-c
+
+USER root
+
+COPY --from=builder /opt/chapel-2.2.0-1.debian12.amd64.deb /tmp/chapel-2.2.0-1.debian12.amd64.deb
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends gcc g++ m4 perl make mawk pkg-config cmake \
-    llvm-dev llvm clang libclang-dev libclang-cpp-dev libedit-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    tar -xzf chapel-1.31.0.tar.gz && \
-    cd chapel-1.31.0 && \
-    source util/quickstart/setchplenv.bash && make && \
-    pip install --no-cache-dir jupyter-kernel-chapel  
+    apt-get install --yes /tmp/chapel-2.2.0-1.debian12.amd64.deb && rm /tmp/chapel-2.2.0-1.debian12.amd64.deb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
-WORKDIR "${HOME}"
+
+RUN pip install jupyter-kernel-chapel && \
+    pip cache purge

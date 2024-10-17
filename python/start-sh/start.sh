@@ -4,9 +4,9 @@
 
 set -e
 
-# The _log function is used for everything this script wants to log. It will
-# always log errors and warnings, but can be silenced for other messages
-# by setting JUPYTER_DOCKER_STACKS_QUIET environment variable.
+# The _log function is used for everything this script wants to log.
+# It will always log errors and warnings but can be silenced for other messages
+# by setting the JUPYTER_DOCKER_STACKS_QUIET environment variable.
 _log () {
     if [[ "$*" == "ERROR:"* ]] || [[ "$*" == "WARNING:"* ]] || [[ "${JUPYTER_DOCKER_STACKS_QUIET}" == "" ]]; then
         echo "$@"
@@ -34,6 +34,17 @@ else
     cmd=( "$@" )
 fi
 
+# Backwards compatibility: `start.sh` is executed by default in ENTRYPOINT
+# so it should no longer be specified in CMD
+if [ "${_START_SH_EXECUTED}" = "1" ]; then
+    _log "WARNING: start.sh is the default ENTRYPOINT, do not include it in CMD"
+    _log "Executing the command:" "${cmd[@]}"
+    exec "${cmd[@]}"
+else
+    export _START_SH_EXECUTED=1
+fi
+
+
 # NOTE: This hook will run as the user the container was started with!
 # shellcheck disable=SC1091
 source /usr/local/bin/run-hooks.sh /usr/local/bin/start-notebook.d
@@ -43,7 +54,7 @@ source /usr/local/bin/run-hooks.sh /usr/local/bin/start-notebook.d
 # things before we run the command passed to start.sh as the desired user
 # (NB_USER).
 #
-if [ "$(id -u)" == 0 ] ; then
+if [ "$(id -u)" == 0 ]; then
     # Environment variables:
     # - NB_USER: the desired username and associated home folder
     # - NB_UID: the desired user id
@@ -51,18 +62,18 @@ if [ "$(id -u)" == 0 ] ; then
     # - NB_GROUP: a group name we want for the group
     # - GRANT_SUDO: a boolean ("1" or "yes") to grant the user sudo rights
     # - CHOWN_HOME: a boolean ("1" or "yes") to chown the user's home folder
-    # - CHOWN_EXTRA: a comma separated list of paths to chown
+    # - CHOWN_EXTRA: a comma-separated list of paths to chown
     # - CHOWN_HOME_OPTS / CHOWN_EXTRA_OPTS: arguments to the chown commands
 
-    # Refit the jovyan user to the desired the user (NB_USER)
-    if id jovyan &> /dev/null ; then
+    # Refit the jovyan user to the desired user (NB_USER)
+    if id jovyan &> /dev/null; then
         if ! usermod --home "/home/${NB_USER}" --login "${NB_USER}" jovyan 2>&1 | grep "no changes" > /dev/null; then
             _log "Updated the jovyan user:"
             _log "- username: jovyan       -> ${NB_USER}"
             _log "- home dir: /home/jovyan -> /home/${NB_USER}"
         fi
     elif ! id -u "${NB_USER}" &> /dev/null; then
-        _log "ERROR: Neither the jovyan user or '${NB_USER}' exists. This could be the result of stopping and starting, the container with a different NB_USER environment variable."
+        _log "ERROR: Neither the jovyan user nor '${NB_USER}' exists. This could be the result of stopping and starting, the container with a different NB_USER environment variable."
         exit 1
     fi
     # Ensure the desired user (NB_USER) gets its desired user id (NB_UID) and is
@@ -77,15 +88,23 @@ if [ "$(id -u)" == 0 ] ; then
         userdel "${NB_USER}"
         useradd --no-log-init --home "/home/${NB_USER}" --shell /bin/bash --uid "${NB_UID}" --gid "${NB_GID}" --groups 100 "${NB_USER}"
     fi
+    # Update the home directory if the desired user (NB_USER) is root and the
+    # desired user id (NB_UID) is 0 and the desired group id (NB_GID) is 0.
+    if [ "${NB_USER}" = "root" ] && [ "${NB_UID}" = "$(id -u "${NB_USER}")" ] && [ "${NB_GID}" = "$(id -g "${NB_USER}")" ]; then
+        sed -i "s|/root|/home/root|g" /etc/passwd
+        # Do not preserve ownership in rootless mode
+        CP_OPTS="-a --no-preserve=ownership"
+    fi
 
-    # Move or symlink the jovyan home directory to the desired users home
+    # Move or symlink the jovyan home directory to the desired user's home
     # directory if it doesn't already exist, and update the current working
     # directory to the new location if needed.
     if [[ "${NB_USER}" != "jovyan" ]]; then
         if [[ ! -e "/home/${NB_USER}" ]]; then
             _log "Attempting to copy /home/jovyan to /home/${NB_USER}..."
             mkdir "/home/${NB_USER}"
-            if cp -a /home/jovyan/. "/home/${NB_USER}/"; then
+            # shellcheck disable=SC2086
+            if cp ${CP_OPTS:--a} /home/jovyan/. "/home/${NB_USER}/"; then
                 _log "Success!"
             else
                 _log "Failed to copy data from /home/jovyan to /home/${NB_USER}!"
@@ -106,7 +125,7 @@ if [ "$(id -u)" == 0 ] ; then
         fi
     fi
 
-    # Optionally ensure the desired user get filesystem ownership of it's home
+    # Optionally ensure the desired user gets filesystem ownership of its home
     # folder and/or additional folders
     if [[ "${CHOWN_HOME}" == "1" || "${CHOWN_HOME}" == "yes" ]]; then
         _log "Ensuring /home/${NB_USER} is owned by ${NB_UID}:${NB_GID} ${CHOWN_HOME_OPTS:+(chown options: ${CHOWN_HOME_OPTS})}"
@@ -121,14 +140,11 @@ if [ "$(id -u)" == 0 ] ; then
         done
     fi
 
-    # Update potentially outdated environment variables since image build
-    export XDG_CACHE_HOME="/home/${NB_USER}/.cache"
-
     # Prepend ${CONDA_DIR}/bin to sudo secure_path
     sed -r "s#Defaults\s+secure_path\s*=\s*\"?([^\"]+)\"?#Defaults secure_path=\"${CONDA_DIR}/bin:\1\"#" /etc/sudoers | grep secure_path > /etc/sudoers.d/path
 
     # Optionally grant passwordless sudo rights for the desired user
-    if [[ "$GRANT_SUDO" == "1" || "$GRANT_SUDO" == "yes" ]]; then
+    if [[ "${GRANT_SUDO}" == "1" || "${GRANT_SUDO}" == "yes" ]]; then
         _log "Granting ${NB_USER} passwordless sudo rights!"
         echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/added-by-start-script
     fi
@@ -139,11 +155,14 @@ if [ "$(id -u)" == 0 ] ; then
     unset_explicit_env_vars
 
     _log "Running as ${NB_USER}:" "${cmd[@]}"
-    exec sudo --preserve-env --set-home --user "${NB_USER}" \
-        LD_LIBRARY_PATH="${LD_LIBRARY_PATH}" \
-        PATH="${PATH}" \
-        PYTHONPATH="${PYTHONPATH:-}" \
-        "${cmd[@]}"
+    if [ "${NB_USER}" = "root" ] && [ "${NB_UID}" = "$(id -u "${NB_USER}")" ] && [ "${NB_GID}" = "$(id -g "${NB_USER}")" ]; then
+        HOME="/home/root" exec "${cmd[@]}"
+    else
+        exec sudo --preserve-env --set-home --user "${NB_USER}" \
+            LD_LIBRARY_PATH="${LD_LIBRARY_PATH}" \
+            PATH="${PATH}" \
+            PYTHONPATH="${PYTHONPATH:-}" \
+            "${cmd[@]}"
         # Notes on how we ensure that the environment that this container is started
         # with is preserved (except vars listed in JUPYTER_ENV_VARS_TO_UNSET) when
         # we transition from running as root to running as NB_USER.
@@ -163,7 +182,7 @@ if [ "$(id -u)" == 0 ] ; then
         # - We use the `--set-home` flag to set the HOME variable appropriately.
         #
         # - To reduce the default list of variables deleted by sudo, we could have
-        #   used `env_delete` from /etc/sudoers. It has higher priority than the
+        #   used `env_delete` from /etc/sudoers. It has a higher priority than the
         #   `--preserve-env` flag and the `env_keep` configuration.
         #
         # - We preserve LD_LIBRARY_PATH, PATH and PYTHONPATH explicitly. Note however that sudo
@@ -171,6 +190,7 @@ if [ "$(id -u)" == 0 ] ; then
         #   above in /etc/sudoers.d/path. Thus PATH is irrelevant to how the above
         #   sudo command resolves the path of `${cmd[@]}`. The PATH will be relevant
         #   for resolving paths of any subprocesses spawned by `${cmd[@]}`.
+    fi
 
 # The container didn't start as the root user, so we will have to act as the
 # user we started as.
@@ -186,7 +206,7 @@ else
     # Attempt to ensure the user uid we currently run as has a named entry in
     # the /etc/passwd file, as it avoids software crashing on hard assumptions
     # on such entry. Writing to the /etc/passwd was allowed for the root group
-    # from the Dockerfile during build.
+    # from the Dockerfile during the build.
     #
     # ref: https://github.com/jupyter/docker-stacks/issues/552
     if ! whoami &> /dev/null; then
