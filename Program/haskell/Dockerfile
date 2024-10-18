@@ -14,9 +14,9 @@ COPY config.yaml /etc/stack/config.yaml
 RUN apt-get update && apt-get install --yes haskell-stack git g++ wget libtinfo-dev libzmq3-dev libcairo2-dev libpango1.0-dev libmagic-dev libblas-dev liblapack-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     wget -O /etc/stack/global-hints-cache.yaml https://mirrors.ustc.edu.cn/stackage/stackage-content/stack/global-hints.yaml && \
-    mkdir -p /opt/stack && 
+    mkdir -p /opt/stack && \
     git clone --depth 1 https://eoelab.org:1027/mirrors/IHaskell.git && \
-    cd IHaskell && sed -i 's/github.com\/codedownio/eoelab.org:1027\/mirrors/g' IHaskell/stack.yaml && \
+    cd IHaskell && sed -i 's/github.com\/codedownio/eoelab.org:1027\/mirrors/g' stack.yaml && \
     # Build IHaskell
     stack install --fast --local-bin-path=/usr/local/bin
 
