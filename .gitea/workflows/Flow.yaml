@@ -214,6 +214,18 @@ jobs:
           context: Program/julia
           tags: eoelab.org:1027/${{ gitea.repository }}:julia
 
+  KOTLIN:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: kotlin build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/kotlin
+          tags: eoelab.org:1027/${{ gitea.repository }}:kotlin
+
   LUA:
     runs-on: runner
     needs: Base
@@ -349,7 +361,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [FORTRAN] # MATLAB_MCM, MAPLE, MMA
+    needs: [KOTLIN] # MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3

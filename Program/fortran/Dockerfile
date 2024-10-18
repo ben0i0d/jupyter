@@ -21,3 +21,5 @@ COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/mamba /opt/mamba
 ENV PATH="/opt/mamba/bin:${PATH}"
 
 USER ${NB_UID}
+
+RUN mv /opt/mamba/share/jupyter/kernels/fortran/ /opt/base/share/jupyter/kernels/
