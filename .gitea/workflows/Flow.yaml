@@ -172,6 +172,11 @@ jobs:
     steps:
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: java build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/java
+          tags: eoelab.org:1027/${{ gitea.repository }}:java
 
   JS:
     runs-on: runner
@@ -332,7 +337,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [CHAPEL] # MATLAB_MCM, MAPLE, MMA
+    needs: [CHAPEL,JAVA] # MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3
