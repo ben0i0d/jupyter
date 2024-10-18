@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install --yes haskell-stack git g++ wget libtinfo-
     wget -O /etc/stack/global-hints-cache.yaml https://mirrors.ustc.edu.cn/stackage/stackage-content/stack/global-hints.yaml && \
     mkdir -p /opt/stack && \
     git clone --depth 1 https://eoelab.org:1027/mirrors/IHaskell.git && \
-    cd IHaskell && sed -i 's/github.com\/codedownio/eoelab.org:1027\/mirrors/g' stack.yaml && \
+    cd IHaskell && sed -i 's/github.com\/codedownio/eoelab.org:1027\/mirrors/g' stack.yaml
     # Build IHaskell
-    stack install --fast --local-bin-path=/usr/local/bin
+#    stack install --fast --local-bin-path=/usr/local/bin
 
 USER ${NB_UID}
 
