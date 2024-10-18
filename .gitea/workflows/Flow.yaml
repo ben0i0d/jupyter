@@ -178,6 +178,18 @@ jobs:
           context: Program/fortran
           tags: eoelab.org:1027/${{ gitea.repository }}:fortran
 
+  GO:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: go build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Program/go
+          tags: eoelab.org:1027/${{ gitea.repository }}:go
+
   HASKELL:
     runs-on: runner
     needs: Base
@@ -373,7 +385,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [KOTLIN] # MATLAB_MCM, MAPLE, MMA
+    needs: [GO] # MATLAB_MCM, MAPLE, MMA
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3
