@@ -385,7 +385,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [GO] # MATLAB_MCM, MAPLE, MMA
+    needs: [MATLAB_MCM, MAPLE, MMA] # 
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3

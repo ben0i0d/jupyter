@@ -26,7 +26,8 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debi
     # install base packages
     apt-get update --yes && apt-get install --yes --no-install-recommends sudo tini unzip python3-venv && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    chmod a+rx /usr/local/bin/* && \
+    # enhance scripts & repair HEALTHCHECK permission denied
+    chmod a+rx /usr/local/bin/* /etc/jupyter/docker_healthcheck.py  && \
     # disable super permision
     echo "auth requisite pam_deny.so" >> /etc/pam.d/su && \
     sed -i.bak -e 's/^%admin/#%admin/' /etc/sudoers && \
@@ -51,7 +52,7 @@ USER ${NB_UID}
 
 # install jupyter extension
 RUN pip install 'jupyterlab' 'jupyterhub' && \
-    pip install jupyterlab-language-pack-zh-CN jupyterlab_tabnine && \
+    pip install jupyterlab-language-pack-zh-CN jupyterlab_tabnine jupyterlab-execute-time && \
     pip cache purge 
 
 WORKDIR "${HOME}"

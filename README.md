@@ -68,6 +68,7 @@ c.DockerSpawner.allowed_images = {
 **Global**
 * jupyterlab-language-pack-zh-CN:Support for Chinese
 * jupyterlab_tabnine：It is used for autocompletion, parameter suggestion, function document query, and jump definition
+* jupyterlab-execute-time: Displays the execution time of each cell
 
 **Part**
 
