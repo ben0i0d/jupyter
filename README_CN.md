@@ -7,6 +7,7 @@ English | [中文](README_CN.md)
 **为中国用户的文档**
 
 **我们的docker镜像仓库是 https://hub.docker.com/r/ben0i0d/jupyter**
+
 **我们的Gitea镜像仓库是 https://eoelab.org:1027/ben0i0d/jupyter**
 
 ### 如何使用
@@ -45,7 +46,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
     * 说明
         1. 上游已经切换到`debian:bookworm-slim`
         2. 添加了sudo的无密码使用，在安全要求较高的场景中，不要允许特权提升
-        3. 提供软件包：.zip文件解压(.zip)
+        3. 提供软件包：.zip文件解压
 * Python：支持Python。
     * Scipy：提供Python的科学计算环境
     * Scrpy: 提供Python的网页采取环境，适用于数据挖掘、网络爬虫
@@ -130,12 +131,14 @@ M-->MF(Scilab)
 * Mathematica 13.3.1
 * Maple 2023
 
-**镜像源**
+**默认镜像源**
 * pip bfsu：https://mirrors.bfsu.edu.cn/help/pypi/
 * apt ustc：https://mirrors.ustc.edu.cn/help/debian.html
 * apache ustc: https://mirrors.ustc.edu.cn/apache/
-* julia-pkg ustc: https://mirrors.ustc.edu.cn/julia/
+* julia-pkg mirrorz: https://mirrors.cernet.edu.cn/julia
 * CRAN ustc：https://mirrors.ustc.edu.cn/CRAN/
+
+***现在你可以通过ARG选择你需要的镜像站点***
 
 ### 项目上游
 jupyter团队项目 https://github.com/jupyter/docker-stacks

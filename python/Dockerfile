@@ -1,6 +1,9 @@
 ARG BASE_IMAGE
 
-FROM ${BASE_IMAGE}
+FROM debian:bookworm-slim
+
+ARG PYPI_MIRROR
+ARG DEBIAN_MIRROR
 
 EXPOSE 8888
 
@@ -22,7 +25,7 @@ COPY jupyter_server_config.py docker_healthcheck.py /etc/jupyter/
 # shell profile , to disable PATH be overwrited by jupyter
 COPY profile /etc/
 
-RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+RUN sed -i "s/deb.debian.org/${DEBIAN_MIRROR}/g" /etc/apt/sources.list.d/debian.sources && \
     # install base packages
     apt-get update --yes && apt-get install --yes --no-install-recommends sudo tini unzip python3-venv && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
@@ -40,7 +43,7 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debi
     mkdir /usr/local/bin/start-notebook.d && mkdir /usr/local/bin/before-notebook.d && \
     # setup base venv & pip_mirror
     mkdir -p "/opt/base/" && python3 -m venv /opt/base && chown -hR "${NB_USER}:${NB_GID}" "/opt/base" && \
-    echo '[global]\nindex-url = https://mirrors.bfsu.edu.cn/pypi/web/simple' >  /etc/pip.conf
+    echo "[global]\nindex-url = ${PYPI_MIRROR}" >  /etc/pip.conf
 
 # HEALTHCHECK documentation: https://docs.docker.com/engine/reference/builder/#healthcheck
 # This healtcheck works well for `lab`, `notebook`, `nbclassic`, `server`, and `retro` jupyter commands

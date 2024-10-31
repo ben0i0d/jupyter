@@ -12,7 +12,10 @@ jobs:
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
           context: python
-          build-args: BASE_IMAGE=debian:bookworm-slim
+          build-args: |
+            BASE_IMAGE=debian:bookworm-slim
+            DEBIAN_MIRROR=mirrors.ustc.edu.cn
+            PYPI_MIRROR=https://mirrors.bfsu.edu.cn/pypi/web/simple
           tags: eoelab.org:1027/${{ gitea.repository }}:py-c
 
   SCIPY:
@@ -236,6 +239,7 @@ jobs:
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
           context: Program/julia
+          build-args: JULIA_MIRROR=https://mirrors.cernet.edu.cn/julia
           tags: eoelab.org:1027/${{ gitea.repository }}:julia
 
   KOTLIN:
@@ -273,6 +277,7 @@ jobs:
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
           context: Program/r
+          build-args: CRAN_MIRROR="USTC='https://mirrors.ustc.edu.cn/CRAN/'"
           tags: eoelab.org:1027/${{ gitea.repository }}:r
 
   NOVNC:

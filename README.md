@@ -7,6 +7,7 @@ English | [中文](README_CN.md)
 **THIS doc for non-CN USER**
 
 **dockerhub: https://hub.docker.com/r/ben0i0d/jupyter**
+
 **Our Gitea: https://eoelab.org:1027/ben0i0d/jupyter**
 
 ### HOW TO USE
@@ -123,12 +124,14 @@ M-->MF(Scilab)
 * Mathematica 14.0
 * Maple 2023
 
-**Mirror source**
+**Default Mirror source**
 * pip bfsu：https://mirrors.bfsu.edu.cn/help/pypi/
 * apt ustc：https://mirrors.ustc.edu.cn/help/debian.html
 * apache ustc: https://mirrors.ustc.edu.cn/apache/
-* julia-pkg ustc: https://mirrors.ustc.edu.cn/julia/
+* julia-pkg mirrorz: https://mirrors.cernet.edu.cn/julia
 * CRAN ustc：https://mirrors.ustc.edu.cn/CRAN/
+
+***Now You can use ARG control which site you want***
 
 ### Upstream of the project
 https://github.com/jupyter/docker-stacks

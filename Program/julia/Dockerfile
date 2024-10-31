@@ -8,9 +8,11 @@ RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg 
     
 FROM eoelab.org:1027/ben0i0d/jupyter:py-c 
 
+ARG JULIA_MIRROR
+
 COPY --chown="${NB_UID}:${NB_GID}" --from=builder /opt/julias/ /opt/julias/
 
-ENV JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia \
+ENV JULIA_PKG_SERVER=${JULIA_MIRROR} \
     JULIA_NUM_THREADS=8 \
     JUPYTER_DATA_DIR=/opt/base/share/jupyter \
     JULIA_DEPOT_PATH=/opt/julia \
