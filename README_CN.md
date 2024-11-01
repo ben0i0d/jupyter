@@ -75,7 +75,7 @@ plt.rcParams["font.family"] = zh_font.get_name()
 
 **全局**
 * jupyterlab-language-pack-zh-CN:对中文的支持
-* jupyterlab_tabnine：用于自动补全、参数建议、函数文档查询、跳转定义
+* jupyterlab-lsp：用于自动补全、参数建议、函数文档查询、跳转定义
 * jupyterlab-execute-time: 用于显示代码执行时间
 
 **局部**

@@ -55,7 +55,7 @@ USER ${NB_UID}
 
 # install jupyter extension
 RUN pip install 'jupyterlab' 'jupyterhub' && \
-    pip install jupyterlab-language-pack-zh-CN jupyterlab_tabnine jupyterlab-execute-time && \
+    pip install jupyterlab-language-pack-zh-CN jupyterlab-lsp jupyterlab-execute-time && \
     pip cache purge 
 
 WORKDIR "${HOME}"

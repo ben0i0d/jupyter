@@ -15,8 +15,8 @@ c.ServerApp.open_browser = False
 # to output both image/svg+xml and application/pdf plot formats in the notebook file
 c.InlineBackend.figure_formats = {"png", "jpeg", "svg", "pdf"}
 
-# https://github.com/jupyter/notebook/issues/3130
-c.FileContentsManager.delete_to_trash = False
+# https://github.com/jupyter/notebook/issues/4916
+c.FileContentsManager.always_delete_dir = True
 
 # https://github.com/jupyter/notebook/issues/7409
 c.ContentsManager.hide_globs = []
