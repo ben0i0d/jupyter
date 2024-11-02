@@ -70,8 +70,13 @@ c.DockerSpawner.allowed_images = {
 * jupyterlab-language-pack-zh-CN:Support for Chinese
 * jupyterlab-lsp：It is used for autocompletion, parameter suggestion, function document query, and jump definition
 * jupyterlab-execute-time: Displays the execution time of each cell
+* jedi-language-server: Python Language server
 
 **Part**
+
+* R: r-languageserver: R Language server
+
+* Julia: julia-language-server: Julia Language server
 
 ### Image dependencies
 ```mermaid

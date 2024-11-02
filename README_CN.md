@@ -77,8 +77,13 @@ plt.rcParams["font.family"] = zh_font.get_name()
 * jupyterlab-language-pack-zh-CN:对中文的支持
 * jupyterlab-lsp：用于自动补全、参数建议、函数文档查询、跳转定义
 * jupyterlab-execute-time: 用于显示代码执行时间
+* jedi-language-server: Python 语言服务器
 
 **局部**
+
+* R: r-languageserver: R 语言服务器
+
+* Julia: julia-language-server: Julia 语言服务器
 
 ### 镜像依赖关系
 ```mermaid

@@ -27,4 +27,5 @@ USER ${NB_UID}
 
 # Install IJulia as jovyan
 RUN julia -e 'import Pkg; Pkg.update()' && \
-    julia -e 'using Pkg; pkg"add IJulia"; pkg"precompile"' 
+    julia -e 'using Pkg; pkg"add IJulia"; pkg"precompile"' && \
+    julia -e 'using Pkg; Pkg.add("LanguageServer")'

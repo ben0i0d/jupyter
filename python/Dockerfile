@@ -53,9 +53,9 @@ HEALTHCHECK --interval=3s --timeout=1s --start-period=3s --retries=3 \
 
 USER ${NB_UID}
 
-# install jupyter extension
+# install jupyterlab jupyterhub  extension python-lsp
 RUN pip install 'jupyterlab' 'jupyterhub' && \
-    pip install jupyterlab-language-pack-zh-CN jupyterlab-lsp jupyterlab-execute-time && \
+    pip install jupyterlab-language-pack-zh-CN jupyterlab-lsp jupyterlab-execute-time jedi-language-server && \
     pip cache purge 
 
 WORKDIR "${HOME}"
