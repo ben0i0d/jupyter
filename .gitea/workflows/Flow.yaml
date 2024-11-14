@@ -343,29 +343,29 @@ jobs:
           context: Math/scilab
           tags: eoelab.org:1027/${{ gitea.repository }}:scilab
 
-  MAPLE:
-    runs-on: runner
-    needs: Base
-    steps:
-      - name: checkout code
-        uses: https://eoelab.org:1027/actions/checkout@v4
-      - name: maple build
-        uses: https://eoelab.org:1027/actions/build-push-action@v6
-        with:
-          context: Math/maple
-          tags: eoelab.org:1027/${{ gitea.repository }}:maple
+  # MAPLE:
+  #   runs-on: runner
+  #   needs: Base
+  #   steps:
+  #     - name: checkout code
+  #       uses: https://eoelab.org:1027/actions/checkout@v4
+  #     - name: maple build
+  #       uses: https://eoelab.org:1027/actions/build-push-action@v6
+  #       with:
+  #         context: Math/maple
+  #         tags: eoelab.org:1027/${{ gitea.repository }}:maple
 
-  MMA:
-    runs-on: runner
-    needs: Base
-    steps:
-      - name: checkout code
-        uses: https://eoelab.org:1027/actions/checkout@v4
-      - name: mma build
-        uses: https://eoelab.org:1027/actions/build-push-action@v6
-        with:
-          context: Math/mathematica
-          tags: eoelab.org:1027/${{ gitea.repository }}:mma
+  # MMA:
+  #   runs-on: runner
+  #   needs: Base
+  #   steps:
+  #     - name: checkout code
+  #       uses: https://eoelab.org:1027/actions/checkout@v4
+  #     - name: mma build
+  #       uses: https://eoelab.org:1027/actions/build-push-action@v6
+  #       with:
+  #         context: Math/mathematica
+  #         tags: eoelab.org:1027/${{ gitea.repository }}:mma
 
   MATLAB_MINIMAL:
     runs-on: runner
@@ -393,7 +393,7 @@ jobs:
 
   Push:
     runs-on: runner
-    needs: [MATLAB_MCM, MAPLE, MMA] # 
+    needs: [MATLAB_MCM] # 
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3
