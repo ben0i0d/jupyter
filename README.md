@@ -6,9 +6,9 @@ English | [中文](README_CN.md)
 
 **THIS doc for non-CN USER**
 
-**dockerhub: https://hub.docker.com/r/ben0i0d/jupyter**
+**ghcr.io: https://github.com/eoeair/jupyter/pkgs/container/jupyter**
 
-**Our Gitea: https://eoelab.org:1027/ben0i0d/jupyter**
+**Our Gitea: https://eoelab.org:1027/eoeair/jupyter**
 
 ### HOW TO USE
 **Docker**

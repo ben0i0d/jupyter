@@ -1,0 +1,24 @@
+name: Push_ghcr
+
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - main
+
+jobs:
+  Push:
+    runs-on: runner
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: retag images
+        run: bash retag.sh
+      - name: login ghcr_registry
+        uses: https://eoelab.org:1027/actions/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.GHCR_PASSWD }}
+      - name: push images to ghcr_registry
+        run: docker image push "ghcr.io/${{ gitea.repository }}" --all-tags

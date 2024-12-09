@@ -6,9 +6,9 @@ English | [中文](README_CN.md)
 
 **为中国用户的文档**
 
-**我们的docker镜像仓库是 https://hub.docker.com/r/ben0i0d/jupyter**
+**ghcr.io: https://github.com/eoeair/jupyter/pkgs/container/jupyter**
 
-**我们的Gitea镜像仓库是 https://eoelab.org:1027/ben0i0d/jupyter**
+**Our Gitea: https://eoelab.org:1027/eoeair/jupyter**
 
 ### 如何使用
 **Docker**
